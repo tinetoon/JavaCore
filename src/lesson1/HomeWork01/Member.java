@@ -1,5 +1,7 @@
 package lesson1.HomeWork01;
 
+import java.lang.reflect.Array;
+
 /**
  * Класс участников
  * Ответственный за создание класса - А.А. Дюжаков
@@ -17,16 +19,6 @@ public class Member {
         this.numberOfObstacles = number;
         ++countMember;
     }
-
-    // Метод вывода информации о членах команды
-//    public void infoTeam() {
-//        System.out.println("===== Карточка участника =====");
-//        for (int i = 0; i < numberOfParticipants; i++) {
-//        System.out.println("Участник № " + getCountMember()
-//                + ", может преодолеть " + getNumberOfObstacles() + " препятствий.");
-//        }
-//        System.out.println("==============================");
-//    }
 
     public int getNumberOfObstacles() {
         return numberOfObstacles;
