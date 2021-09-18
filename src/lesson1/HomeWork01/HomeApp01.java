@@ -23,7 +23,7 @@ public class HomeApp01 {
 //        dreamTeam.dreamTeamBuilding();
 //        dreamTeam.infoTeam();
 //        dreamTeam.getMembersTeam();
-
+        newCourse.doIt(dreamTeam.getMembersTeam());
     }
 
 }

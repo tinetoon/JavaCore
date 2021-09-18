@@ -42,6 +42,15 @@ public class Course {
 
     // Метод, который просит команду пройти полосу препятствий
     public void doIt(Member[] team) {
+        System.out.println("===== Соревнования =====");
+        for (int i = 0; i < team.length; i++) {
+            for (int j = 0; j < arrayObstacles.length; j++) {
+                if (!team[i].goObstacles(j)) {
+                    continue;
+                } else System.out.println("Участник № " + team[i].getCountMember()
+                        + " преодолел " + team[i].countObstacles(j + 1) + " препятствий");
+            }
 
+        }
     }
 }

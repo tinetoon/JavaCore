@@ -75,9 +75,9 @@ public class Team {
         System.out.println("==============================");
     }
 
-//    public Array[] getMembersTeam() {
-//        return membersTeam;
-//    }
+    public Member[] getMembersTeam() {
+        return membersTeam;
+    }
 
     public String getTeamName() {
         return teamName;
