@@ -16,7 +16,6 @@ import java.sql.Array;
 
 public class Team {
 
-    public OptionalDataException getMembersTeam;
     // Создаём поля класса команда
     private String teamName; // название команды
     private int numberOfParticipants; // количество участников
@@ -45,8 +44,8 @@ public class Team {
     public void dreamTeamBuilding() {
         membersTeam = new Member[5];
         for (int i = 0; i < 5; i++) {
-            membersTeam[i] = new Member(maxSkillObstacles);
-//            membersTeam[i] = new Member(Tools.random.nextInt(maxSkillObstacles + maxSkillObstacles/2));
+//            membersTeam[i] = new Member(5);
+            membersTeam[i] = new Member(Tools.random.nextInt(maxSkillObstacles + maxSkillObstacles/2));
         }
 //        return arr;
 //        System.out.println("Длина массива участников: " + arr.length);
@@ -77,5 +76,9 @@ public class Team {
 
     public String getTeamName() {
         return teamName;
+    }
+
+    public int getMaxSkillObstacles() {
+        return maxSkillObstacles;
     }
 }
