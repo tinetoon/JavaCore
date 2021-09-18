@@ -13,6 +13,7 @@ public class Member {
     // Поля класса
     private int numberOfObstacles; // Количество препятствий, которое может преодолеть участник
     private int countMember; // Номер участника
+    private int winMember = 0; // Признак провала дистанции (дистанция провалена, если признак = 1)
     public static int count = 0; // Номер участник
 
     // Конструктор
@@ -40,6 +41,7 @@ public class Member {
 
     // Метод возвращающий ошибку при попытке количество препятствий, превышающих возможности участника
     public void printGoObstaclesError() {
+        winMember = 1;
         System.out.println("Внимание! Участник № " + Integer.toString(countMember) + " не справился, он может преодолеть не более " + Integer.toString(numberOfObstacles) + " препятствий");
     }
 
@@ -50,4 +52,8 @@ public class Member {
     public int getNumberOfObstacles() {
         return numberOfObstacles;
     }
+    public int getWinMember() {
+        return winMember;
+    }
+
 }

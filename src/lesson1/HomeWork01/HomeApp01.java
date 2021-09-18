@@ -11,19 +11,16 @@ public class HomeApp01 {
 
         // Создаём команду мечты
         Team dreamTeam = new Team("Команда мечты", 4, 5);
-//        dreamTeam.dreamTeamBuilding();
-        System.out.println("Team # ");
-        System.out.println("Команда: " + dreamTeam.getTeamName());
-        System.out.println("----------------------------");
-        System.out.println("Member # ");
-        System.out.println("Участники ");
+        System.out.println("===== Карточка команды =====");
+        System.out.println("Название: " + dreamTeam.getTeamName());
+//        System.out.println("----------------------------");
+//        System.out.println("Member # ");
+//        System.out.println("Участники ");
         dreamTeam.infoTeam();
 
         Course newCourse = new Course(5); // Создаём полосу из 5-ти препятствий
-//        dreamTeam.dreamTeamBuilding();
-//        dreamTeam.infoTeam();
-//        dreamTeam.getMembersTeam();
-        newCourse.doIt(dreamTeam.getMembersTeam());
+        newCourse.doIt(dreamTeam.getMembersTeam()); // Просим всех участников пройти дистанцию
+        dreamTeam.infoTeamPassedDistance(); // Выводим в консоль результаты прохождения дистанции
     }
 
 }

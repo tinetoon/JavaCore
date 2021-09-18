@@ -28,39 +28,28 @@ public class Team {
         this.numberOfParticipants = number;
         this.maxSkillObstacles = obstacles;
 
-//        membersTeam = new Member[5]; // Создаём массив из участников
         dreamTeamBuilding(); // Создаём массив из участников
 
-//        membersTeam[0] = new Member(5);
-//        membersTeam[1] = new Member(10);
-//        membersTeam[2] = new Member(15);
-//        membersTeam[3] = new Member(20);
-//        membersTeam[4] = new Member(25);
-
-//        infoTeam();
     }
 
     // Метод для создания массива участников
     public void dreamTeamBuilding() {
         membersTeam = new Member[numberOfParticipants];
         for (int i = 0; i < numberOfParticipants; i++) {
-//            membersTeam[i] = new Member(5);
             membersTeam[i] = new Member(Tools.random.nextInt(maxSkillObstacles + maxSkillObstacles/2));
         }
-//        return arr;
-//        System.out.println("Длина массива участников: " + arr.length);
-//
-//        for (int i = 0; i < membersTeam.length; i++) {
-//            System.out.println("Участник № " + membersTeam[i].getCountMember()
-//                    + ", может преодолеть " + membersTeam[i].getNumberOfObstacles() + " препятствий");
-//        }
 
-//        infoTeam();
     }
 
     // Метод вывода информации о членах команды, прошедших дистанцию
     public void infoTeamPassedDistance() {
-
+        System.out.println("===== Итоги соревнований =====");
+        System.out.println("Дистанцию успешно прошли следующие участники: ");
+        for (int i = 0; i < numberOfParticipants; i++) {
+            if (membersTeam[i].getWinMember() == 1) {
+                continue;
+            } else System.out.println("- участник № " + membersTeam[i].getCountMember());
+        }
     }
 
     // Метод вывода информации о всех членах команды
@@ -72,18 +61,13 @@ public class Team {
             System.out.println("Участник № " + membersTeam[i].getCountMember()
                     + ", может преодолеть " + membersTeam[i].getNumberOfObstacles() + " препятствий");
         }
-        System.out.println("==============================");
     }
 
+    // Геттеры на массив участников и имя команды
     public Member[] getMembersTeam() {
         return membersTeam;
     }
-
     public String getTeamName() {
         return teamName;
-    }
-
-    public int getMaxSkillObstacles() {
-        return maxSkillObstacles;
     }
 }

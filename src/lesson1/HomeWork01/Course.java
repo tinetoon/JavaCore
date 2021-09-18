@@ -6,7 +6,7 @@ package lesson1.HomeWork01;
  * Дата создания: 18.09.2021
  * 3. Добавить класс Course (полоса препятствий), в котором будут находиться:
  * + массив препятствий;
- * - метод, который будет просить команду пройти всю полосу.
+ * + метод, который будет просить команду пройти всю полосу.
  */
 
 public class Course {
@@ -47,8 +47,10 @@ public class Course {
             for (int j = 0; j < arrayObstacles.length; j++) {
                 if (!team[i].goObstacles(j)) {
                     continue;
-                } else System.out.println("Участник № " + team[i].getCountMember()
-                        + " преодолел " + team[i].countObstacles(j + 1) + " препятствий");
+                } else {
+                    System.out.println("Участник № " + team[i].getCountMember()
+                            + " преодолел " + team[i].countObstacles(j + 1) + " препятствий");
+                }
             }
 
         }
