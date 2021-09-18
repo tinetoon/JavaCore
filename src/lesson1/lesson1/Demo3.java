@@ -1,4 +1,4 @@
-package ru.geekbrains.qa.java2.lesson1;
+package lesson1.lesson1;
 
 /* Презентация "Наследование". */
 public class Demo3 {
