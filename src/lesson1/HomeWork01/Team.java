@@ -21,7 +21,7 @@ public class Team {
     private String teamName; // название команды
     private int numberOfParticipants; // количество участников
     private int maxSkillObstacles; // максимальное количество препятствий, которое может преодолеть участник в результате тренировок
-//    private Member[] membersTeam;
+    private Member[] membersTeam;
 
     // Создаём конструктор
     public Team(String name, int number, int obstacles) {
@@ -29,7 +29,7 @@ public class Team {
         this.numberOfParticipants = number;
         this.maxSkillObstacles = obstacles;
 
-//        Member[] membersTeam = new Member[5]; // Создаём массив из участников
+//        membersTeam = new Member[5]; // Создаём массив из участников
         dreamTeamBuilding(); // Создаём массив из участников
 
 //        membersTeam[0] = new Member(5);
@@ -43,9 +43,10 @@ public class Team {
 
     // Метод для создания массива участников
     public void dreamTeamBuilding() {
-        Member[] membersTeam = new Member[5];
+        membersTeam = new Member[5];
         for (int i = 0; i < 5; i++) {
-            membersTeam[i] = new Member(Tools.random.nextInt(maxSkillObstacles + maxSkillObstacles/2));
+            membersTeam[i] = new Member(maxSkillObstacles);
+//            membersTeam[i] = new Member(Tools.random.nextInt(maxSkillObstacles + maxSkillObstacles/2));
         }
 //        return arr;
 //        System.out.println("Длина массива участников: " + arr.length);
