@@ -20,55 +20,61 @@ public class Team {
     // Создаём поля класса команда
     private String teamName; // название команды
     private int numberOfParticipants; // количество участников
-    private int maxObstacles; // максимальное количество препятствий
-    private Array membersTeam[];
+    private int maxSkillObstacles; // максимальное количество препятствий, которое может преодолеть участник в результате тренировок
+//    private Member[] membersTeam;
 
     // Создаём конструктор
     public Team(String name, int number, int obstacles) {
         this.teamName = name;
         this.numberOfParticipants = number;
-        this.maxObstacles = obstacles;
+        this.maxSkillObstacles = obstacles;
 
+//        Member[] membersTeam = new Member[5]; // Создаём массив из участников
         dreamTeamBuilding(); // Создаём массив из участников
+
+//        membersTeam[0] = new Member(5);
+//        membersTeam[1] = new Member(10);
+//        membersTeam[2] = new Member(15);
+//        membersTeam[3] = new Member(20);
+//        membersTeam[4] = new Member(25);
+
+        infoTeam();
     }
 
     // Метод для создания массива участников
     public void dreamTeamBuilding() {
         Member[] membersTeam = new Member[5];
-//        for (int i = 0; i < 5; i++) {
-//            membersTeam[i] = new Member(Tools.random.nextInt(maxObstacles));
+        for (int i = 0; i < 5; i++) {
+            membersTeam[i] = new Member(Tools.random.nextInt(maxSkillObstacles + maxSkillObstacles/2));
+        }
+//        return arr;
+//        System.out.println("Длина массива участников: " + arr.length);
+//
+//        for (int i = 0; i < membersTeam.length; i++) {
+//            System.out.println("Участник № " + membersTeam[i].getCountMember()
+//                    + ", может преодолеть " + membersTeam[i].getNumberOfObstacles() + " препятствий");
 //        }
 
-        membersTeam[0] = new Member(5);
-        membersTeam[1] = new Member(4);
-        membersTeam[2] = new Member(3);
-        membersTeam[3] = new Member(2);
-        membersTeam[4] = new Member(1);
-//        membersTeam[5] = new Member(0);
-
-        System.out.println(membersTeam.length);
-
-        for (int i = 0; i < membersTeam.length; i++) {
-            System.out.println("Участник № " + membersTeam[i].getCountMember()
-                    + ", может преодолеть " + membersTeam[i].getNumberOfObstacles());
-        }
+//        infoTeam();
     }
 
-    // Метод вывода информации о членах команды
-    public void infoTeam(int i) {
-        System.out.println("===== Карточка участника =====");
-        for (int i = 0; i < membersTeam.length; i++) {
+    // Метод вывода информации о всех членах команды
+    public void infoTeam() {
+        System.out.println("===== Карточка участников =====");
+        System.out.println("Длина массива участников: " + membersTeam.length);
+
+        for (int i = 0; i < 5; i++) {
             System.out.println("Участник № " + membersTeam[i].getCountMember()
-                    + ", может преодолеть " + membersTeam[i].getNumberOfObstacles());
+                    + ", может преодолеть " + membersTeam[i].getNumberOfObstacles() + " препятствий");
         }
         System.out.println("==============================");
     }
 
-    public void print() {
-        System.out.println(membersTeam[0].getC);
-    }
+//    public Array[] getMembersTeam() {
+//        return membersTeam;
+//    }
 
-    public Array[] getMembersTeam() {
-        return membersTeam;
+    public String getTeamName() {
+        return teamName;
     }
 }

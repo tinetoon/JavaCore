@@ -7,32 +7,20 @@ package lesson1.HomeWork01;
 
 public class HomeApp01 {
 
-    private static Team team;
-
     public static void main(String[] args) {
 
         // Создаём команду мечты
-        team = new Team("Команда мечты", 5, 5);
+        Team dreamTeam = new Team("Команда мечты", 5, 5);
+//        dreamTeam.dreamTeamBuilding();
+        System.out.println("Team # ");
+        System.out.println("Команда: " + dreamTeam.getTeamName());
+        System.out.println("----------------------------");
+        System.out.println("Member # ");
+        System.out.println("Участники ");
+//        dreamTeam.dreamTeamBuilding();
+//        dreamTeam.infoTeam();
+//        dreamTeam.getMembersTeam();
 
-//        for (int i = 0; i < 5; i++) {
-//            System.out.println("Участник № " + team.
-//                    + ", может преодолеть " + membersTeam[].getNumberOfObstacles() + " препятствий.");
-//        }
-
-        for (int i = 0; i < team.getMembersTeam.length; i++) {
-            System.out.println("Участник № " + team.membersTeam[i].getCountMember()
-                    + ", может преодолеть " + team.membersTeam[i].getNumberOfObstacles());
-        }
     }
 
-    // Метод вывода информации о членах команды
-    public void infoTeam() {
-        System.out.println("===== Карточка участника =====");
-
-        for (int i = 0; i < team.getMembersTeam.length; i++) {
-            System.out.println("Участник № " + team.getMembersTeam[i].getCountMember()
-                    + ", может преодолеть " + team.getMembersTeam[i].getNumberOfObstacles());
-        }
-        System.out.println("==============================");
-    }
 }
