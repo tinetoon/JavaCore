@@ -9,12 +9,16 @@ import java.util.Locale;
  */
 
 public class Main {
+
     public static void main(String[] args) {
 
 //        example01();
 //        example02();
-        example03();
+//        example03();
+//        example04();
 
+//        String str = "Java";
+//        System.out.println(str.charAt(2));
     }
 
     // 1 пример
@@ -41,8 +45,35 @@ public class Main {
         System.out.print(s1.equals(s2)); // Сравнивает посимвольно - true
     }
 
+    // 04 пример
+    public static void example04() {
+        String s = "value = " + 2 + 2;
+        System.out.println("Пример 4, ответ: " + s);
+    }
+
     // 0 пример
     public static void example0() {
 
     }
+
+    void doSomething1(int arr1, int агг2) {
+
+    }
+
+    String makeText(char arr) {
+        return "a";
+    }
+
+    boolean isNegative(int n) {
+        return 1 > 2;
+    }
+
+    int add(int arr) {
+        return 2;
+    }
+
+    void printArray(int arr[]) {
+
+    }
+
 }
