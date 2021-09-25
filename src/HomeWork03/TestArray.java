@@ -35,7 +35,18 @@ public class TestArray<T> {
         return arr;
     }
 
+    // Метод замены элемента массива
+    public char[] swapElementsChar(char[] arr, int firstElementNum, int secondElementNum) {
+        char[] temp = new char[2];
 
+        temp[0] = arr[firstElementNum];
+        temp[1] = arr[secondElementNum];
+
+        arr[firstElementNum] = temp[1];
+        arr[secondElementNum] = temp[0];
+
+        return arr;
+    }
 
     public T getObj() {
         return obj;

@@ -1,7 +1,5 @@
 package HomeWork03;
 
-import java.lang.reflect.Array;
-
 /**
  * Ответственный за создание класса - А.А. Дюжаков
  * Дата создания: 23.09.2021
@@ -55,19 +53,38 @@ public class HomeApp03 {
 //        Tools.printStrArray(testStrArr);
 
         // операции для ссылочного метода
-        String[] temp = new String[2];
-        temp[0] = newArr.getObj()[1];
-        temp[1] = newArr.getObj()[6];
+//        String[] temp = new String[2];
+//        temp[0] = newArr.getObj()[1];
+//        temp[1] = newArr.getObj()[6];
 //        newArr.setObj(newArr.swapElementsNew(testStrArr, 1, 6));
         newArr.setObj(newArr.swapElementsNew(newArr.getObj(), 1, 6));
-
-
 //        TestArray<String[]> newTempArr = new TestArray<>(temp);
 
         // TestArray<String[]> newArr = new TestArray<String[]>(testStrArr)
 //        newArr = swapElements(newArr, 1, 6);
         System.out.println("1.4 Новый ссылочный массив");
         Tools.printStrArray(newArr.getObj());
+
+        char[] testCharArr = new char[] {'~', '@', '#', '$', '%', '&', '*'}; // Объявляем и инициализируем массив символьного типа
+        TestArray<char[]> newCharArr = new TestArray<>(testCharArr); // Создаём ссылочный массив из массива символьного типа
+        System.out.println("1.5 Оригинальный ссылочный массив");
+        Tools.printCharArray(newCharArr.getObj());
+        newCharArr.setObj(newCharArr.swapElementsChar(newCharArr.getObj(), 1, 6));
+        System.out.println("1.6 Новый ссылочный массив");
+        Tools.printCharArray(newCharArr.getObj());
+
+//        String[] testStrArr2 = new String[] {"Каждый", "Охотник", "Желает", "Знать", "Где", "Сидит", "Фазан"}; // Объявляем и инициализируем массив строкового типа
+//        Array<String> newStringArr = new Array<>("Каждый", "Охотник", "Желает", "Знать", "Где", "Сидит", "Фазан"); // Создаём ссылочный массив из массива строкового типа
+        NewArray<String> newStringArr2 = new NewArray<>(String.class,"Каждый", "Охотник", "Желает", "Знать", "Где", "Сидит", "Фазан");
+        System.out.println("1.7 Оригинальный ссылочный массив");
+        newStringArr2.printArray();
+        newStringArr2.swapElements(newStringArr2.getNewArray(), 1, 6);
+        System.out.println("1.8 Новый ссылочный массив");
+        newStringArr2.printArray();
+
+//        NewArray<char> newCharArr2 = new NewArray<>(char.class,'~', '@', '#', '$', '%', '&', '*');
+//        Tools.printCharArray(newCharArr2.getNewArray());
+//        NewArray<char> newCharArr2 = new NewArray<>(char.class, '@');
     }
 
     //Метод, который меняет два элемента массива местами

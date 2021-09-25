@@ -39,4 +39,20 @@ public class Tools {
         }
         System.out.println();
     }
+
+    // Метод для вывода одномерного char массива в консоль
+    public static void printCharArray(char[] inputArray) {
+        for (int i = 0; i < inputArray.length; i++) {
+            System.out.print(inputArray[i] + "\t");
+        }
+        System.out.println();
+    }
+
+    // Метод для вывода одномерного массива в консоль
+    public static void printArray(NewArray[] inputArray) {
+        for (int i = 0; i < inputArray.length; i++) {
+            System.out.print(inputArray[i] + "\t");
+        }
+        System.out.println();
+    }
 }
