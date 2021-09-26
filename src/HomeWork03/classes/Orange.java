@@ -10,11 +10,8 @@ public class Orange extends Fruit {
 
     static final float WEIGHT_ORANGE = 1.5f;
 
-//    public static int count = 0;
-
     // Конструктор класса
     public Orange() {
         super(WEIGHT_ORANGE);
-//        ++this.count;
     }
 }
