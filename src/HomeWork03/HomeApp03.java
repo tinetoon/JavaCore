@@ -78,6 +78,17 @@ public class HomeApp03 {
                 + boxOrange01.compare(boxApple01.getListBox()));
         System.out.println("В коробке с апельсинами и яблоками № 2 одинаковое количество фруктов: "
                 + boxOrange01.compare(boxApple02.getListBox()));
+
+        System.out.println("Коробка с апельсинами: " + boxOrange01.getListBox().get(0));
+        System.out.println("Коробка с яблоками № 1: " + boxApple01.getListBox().get(0));
+        System.out.println("Коробка с яблоками № 2: " + boxApple02.getListBox().get(0));
+        System.out.println("Проверка наличия в коробке апельсинов: " + (boxOrange01.getListBox().get(0) instanceof Orange));
+        System.out.println("Проверка наличия в коробке апельсинов: " + (boxOrange01 instanceof Box<Orange>));
+
+        reMultiplicationApple(boxApple01, boxApple02);
+        System.out.println("Пересыпаем яблоки из коробки № 1 в коробку № 2.");
+        System.out.println("Коробка с яблоками № 1: " + boxApple01.getListBox().size());
+        System.out.println("Коробка с яблоками № 2: " + boxApple02.getListBox().size());
     }
 
     // Метод для наполнения коробки апельсинами
@@ -95,6 +106,18 @@ public class HomeApp03 {
             Apple[] appleArr = new Apple[contApple];
             appleArr[i] = new Apple();
             box.addFruit(appleArr[i]);
+        }
+    }
+
+    // Метод для пересыпания фруктов из одной коробки в другую
+    public static void reMultiplicationApple(Box<? extends Fruit> box1, Box<? extends Fruit> box2) {
+        if (box1.getListBox().get(0) instanceof Orange && box1.getListBox().get(0) instanceof Orange) {
+            multiplicationOrange((Box<Orange>) box2, box1.getListBox().size());
+            box1.getListBox().removeAll(box1.getListBox());
+        }
+        if (box1.getListBox().get(0) instanceof Apple && box1.getListBox().get(0) instanceof Apple) {
+            multiplicationApple((Box<Apple>) box2, box1.getListBox().size());
+            box1.getListBox().removeAll(box1.getListBox());
         }
     }
 
