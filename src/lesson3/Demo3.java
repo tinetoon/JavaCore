@@ -1,4 +1,4 @@
-package ru.geekbrains.qa.java2.lesson3;
+package lesson3;
 
 // Коробка с двумя разными типами
 public class Demo3 {

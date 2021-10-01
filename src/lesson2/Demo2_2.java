@@ -1,4 +1,4 @@
-package ru.geekbrains.qa.java2.lesson2;
+package lesson2;
 
 import java.io.File;
 

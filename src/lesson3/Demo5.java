@@ -1,4 +1,4 @@
-package ru.geekbrains.qa.java2.lesson3;
+package lesson3;
 
 // Презентация "Обобщенные методы"
 public class Demo5 {

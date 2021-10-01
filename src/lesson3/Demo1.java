@@ -1,4 +1,4 @@
-package ru.geekbrains.qa.java2.lesson3;
+package lesson3;
 
 // Описание проблемы
 public class Demo1 {

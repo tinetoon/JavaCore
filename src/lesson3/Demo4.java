@@ -1,4 +1,4 @@
-package ru.geekbrains.qa.java2.lesson3;
+package lesson3;
 
 // Презентация "Ограниченные типы"
 public class Demo4 {

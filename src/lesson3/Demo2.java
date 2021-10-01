@@ -1,4 +1,4 @@
-package ru.geekbrains.qa.java2.lesson3;
+package lesson3;
 
 // Демонстрация обобщенного класса
 public class Demo2 {
