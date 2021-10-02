@@ -81,21 +81,19 @@ public class HomeApp04 {
 
     // Метод поиска телефона
     public static void get(PhoneBook book, String name) {
-//        return hashMap.get(name);
 
         PhoneCard tempCard = new PhoneCard(); // Объявляем временную карточку
 
         tempCard.add(name, "Номер неизвестен"); // Значение по умолчанию
-        int tmpGood = 0;
+        int tmpGood = 0; // Временный ключ проверки поиска имени (0 - имя не найдено, 1 - имя найдено)
 
         if (!book.getPhoneBook().isEmpty()) { // Проверяем пустоту телефонной книги
 
             for (PhoneCard card : book.getPhoneBook()) { // Бежим по всем элементам телефонной книги
-//                System.out.println(card.containsKey(name));
                 if (card.getHashCard().containsKey(name)) { // Проверяем наличие ключа с именем
 //                    tempCard.add(name, card.getHashCard().get(name)); // Если всё ОК, присваиваем номер во временную карточку и возвращаем её
-                    card.printCard();
-                    tmpGood = 1;
+                    card.printCard(); // Если всё ОК, печатаем карточку
+                    tmpGood = 1; // Меняем ключ проверки поиска имени
                 }
             }
 
@@ -105,7 +103,6 @@ public class HomeApp04 {
         } else {
             System.out.println("Телефонная книга пуста");
         }
-//        tempCard.printCard();
     }
 
 }
