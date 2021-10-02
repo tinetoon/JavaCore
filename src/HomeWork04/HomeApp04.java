@@ -91,7 +91,6 @@ public class HomeApp04 {
 
             for (PhoneCard card : book.getPhoneBook()) { // Бежим по всем элементам телефонной книги
                 if (card.getHashCard().containsKey(name)) { // Проверяем наличие ключа с именем
-//                    tempCard.add(name, card.getHashCard().get(name)); // Если всё ОК, присваиваем номер во временную карточку и возвращаем её
                     card.printCard(); // Если всё ОК, печатаем карточку
                     tmpGood = 1; // Меняем ключ проверки поиска имени
                 }
