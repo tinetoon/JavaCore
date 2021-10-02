@@ -15,10 +15,6 @@ public class HomeApp04 {
 
     public static void main(String[] args) {
 
-//        String[] Lorem = new String[] {"Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit.",
-//                "Quisque", "mollis", "suscipit", "felis", "hendrerit", "auctor.",
-//                "Quisque", "ac", "mi", "viverra", "pretium", "tortor"};
-
         System.out.println("===== Задание № 1 =====");
 
         String[] Lorem = new String[] {"Сегодня", "отличный", "день", "я", "пошёл", "сегодня", "домой", "после",
@@ -49,14 +45,14 @@ public class HomeApp04 {
         directory.add("Сергей", "+79991234567");
         directory.add("Борис", "+79991234567");
         directory.add("Антон", "+79991234567(2)");
-//        System.out.println("Сергей, тел.: " + directory.get("Сергей"));
-//        System.out.println("Антон, тел.: " + directory.get("Антон"));
 
-        get2(directory, "Антон");
-        get2(directory, "Иван");
+        // Ищем в телефонной книге directory абонентов
+        get(directory, "Антон");
+        get(directory, "Иван");
 
+        // Создадим пустую телефонную книгу и проведём по ней поиск
         PhoneBook directory2 = new PhoneBook();
-        get2(directory2, "Иван");
+        get(directory2, "Иван");
 
     }
 
@@ -84,32 +80,7 @@ public class HomeApp04 {
     }
 
     // Метод поиска телефона
-    public static PhoneCard get(PhoneBook book, String name) {
-//        return hashMap.get(name);
-
-        PhoneCard tempCard = new PhoneCard(); // Объявляем временную карточку
-
-        tempCard.add(name, "Номер неизвестен"); // Значение по умолчанию
-
-        if (!book.getPhoneBook().isEmpty()) { // Проверяем пустоту телефонной книги
-
-            for (PhoneCard card : book.getPhoneBook()) { // Бежим по всем элементам телефонной книги
-//                System.out.println(card.containsKey(name));
-                if (card.getHashCard().containsKey(name)) { // Проверяем наличие ключа с именем
-                    tempCard.add(name, card.getHashCard().get(name)); // Если всё ОК, присваиваем номер во временную карточку и возвращаем её
-                    return card;
-                } else {
-                    return tempCard;
-                }
-            }
-        } else {
-            System.out.println("Телефонная книга пуста");
-        }
-        return tempCard;
-    }
-
-    // Метод поиска телефона
-    public static void get2(PhoneBook book, String name) {
+    public static void get(PhoneBook book, String name) {
 //        return hashMap.get(name);
 
         PhoneCard tempCard = new PhoneCard(); // Объявляем временную карточку

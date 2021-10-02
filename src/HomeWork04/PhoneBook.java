@@ -1,9 +1,6 @@
 package HomeWork04;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Ответственный за создание класса - А.А. Дюжаков
@@ -19,12 +16,10 @@ import java.util.Map;
 public class PhoneBook {
 
     private ArrayList<PhoneCard> phoneBook;
-//    private HashMap<String, String> hashMap;
 
+    // Конструктор класса
     public PhoneBook() {
         this.phoneBook = new ArrayList<>();
-//        this.hashMap = new HashMap<>();
-
     }
 
     // Метод добавления записей в телефонную книгу
@@ -35,29 +30,7 @@ public class PhoneBook {
         phoneBook.add(field);
     }
 
-//    // Метод поиска телефона
-//    public PhoneCard get(String name) {
-////        return hashMap.get(name);
-//
-//        PhoneCard tempCard = new PhoneCard();
-//        tempCard.add(name, "Номер неизвестен");
-//        if (!phoneBook.isEmpty()) {
-//            for (PhoneCard : phoneBook.) {
-//
-//            }
-//        } else {
-//            System.out.println("Телефонная книга пуста");
-//        }
-//        return tempCard;
-//    }
-
-//    public void get2(String name) {
-//        for (Map.Entry<String, String> entry : hashMap.entrySet()) {
-//            System.out.println("Пользователь: " + entry.getKey() + ", тел.: " + entry.getValue() + " раз");
-//        }
-//    }
-
-
+    // Геттер
     public ArrayList<PhoneCard> getPhoneBook() {
         return phoneBook;
     }
