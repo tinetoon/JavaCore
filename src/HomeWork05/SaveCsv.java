@@ -21,7 +21,7 @@ public class SaveCsv {
     }
 
     // Метод записи байт данных в файл
-    public void saveHeaderC (AppData data) {
+    public void saveDataInFile (AppData data) {
         try (OutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
 
             for (int i = 0; i < data.getHeader().length; i++) {

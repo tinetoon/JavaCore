@@ -24,4 +24,12 @@ public class AppData {
     public int[][] getData() {
         return data;
     }
+
+    // Сеттеры
+    public void setHeader(String[] header) {
+        this.header = header;
+    }
+    public void setData(int[][] data) {
+        this.data = data;
+    }
 }
