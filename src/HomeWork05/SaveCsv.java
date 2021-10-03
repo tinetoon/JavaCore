@@ -21,12 +21,36 @@ public class SaveCsv {
     }
 
     // Метод записи байт данных в файл
+    public void saveHeaderC (AppData data) {
+        try (OutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
+
+            for (int i = 0; i < data.getHeader().length; i++) {
+                out.write((data.getHeader()[i] + ";").getBytes(StandardCharsets.UTF_8));
+            }
+
+            out.write("\n".getBytes(StandardCharsets.UTF_8));
+
+            for (int i = 0; i < data.getData().length; i++) {
+                for (int j = 0; j < data.getData()[i].length; j++) {
+                    out.write((Integer.toString(data.getData()[i][j]) + ";").getBytes(StandardCharsets.UTF_8));
+                }
+                out.write("\n".getBytes(StandardCharsets.UTF_8));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Метод записи байт данных в файл
     public void saveHeaderB (AppData data) {
         try (OutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
 
             for (int i = 0; i < data.getHeader().length; i++) {
-                out.write(data.getHeader()[i].getBytes(StandardCharsets.UTF_8));
+                out.write((data.getHeader()[i] + ";").getBytes(StandardCharsets.UTF_8));
             }
+
+            out.write("\n".getBytes(StandardCharsets.UTF_8));
 //
 //            for (int i = 0; i < data.getData().length; i++) {
 //                for (int j = 0; j < data.getData()[i].length; j++) {
@@ -45,7 +69,7 @@ public class SaveCsv {
 
             for (int i = 0; i < data.getData().length; i++) {
                 for (int j = 0; j < data.getData()[i].length; j++) {
-                    out.write(Integer.toString(data.getData()[i][j]).getBytes(StandardCharsets.UTF_8));
+                    out.write((Integer.toString(data.getData()[i][j]) + ";").getBytes(StandardCharsets.UTF_8));
                 }
             }
 
