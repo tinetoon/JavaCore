@@ -76,4 +76,14 @@ public class Main {
 
     }
 
+    public static String ageСheck (int age) {
+        String check;
+        if (age <= 1982) {
+            check = "Вы слишком стары для этого...";
+        } else {
+            check = "У Вас всё ещё впереди...";
+        }
+        return check;
+    }
+
 }
