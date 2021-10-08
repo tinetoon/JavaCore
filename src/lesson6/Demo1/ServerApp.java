@@ -1,4 +1,4 @@
-package ru.geekbrains.qa.java2.lesson6.Demo1;
+package lesson6.Demo1;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

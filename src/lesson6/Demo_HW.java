@@ -1,4 +1,4 @@
-package ru.geekbrains.qa.java2.lesson6;
+package lesson6;
 
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
