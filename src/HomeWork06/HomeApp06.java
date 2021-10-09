@@ -33,7 +33,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  * для получения данных в метрических единицах
  *
  * С дополнительным параметром GET запрос будет выглядеть следующим образом:
- * api.openweathermap.org/data/2.5/forecast?zip=198097,RU&appid=716cb70e7508d5933ac312eb82eb98bf&units=metric
+ * api.openweathermap.org/data/2.5/forecast?zip=198097,RU&appid=7063829f1fd4a64b42f6787514262064&units=metric
  */
 
 public class HomeApp06 {
