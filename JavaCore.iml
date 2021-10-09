@@ -10,7 +10,17 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://D:/Обучение/GeekBrains/Четверть 03/Java Core для тестировщиков/okhttp-4.9.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../okhttp-4.9.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../okio-2.10.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

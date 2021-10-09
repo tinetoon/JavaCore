@@ -24,8 +24,8 @@ public class Demo3 {
         // 1 метод - openStream
         InputStream in = url.openStream();
         new BufferedReader(new InputStreamReader(in, UTF_8))
-            .lines()
-            .forEach(System.out::println);
+            .lines() // возвращает Stream (поток) строк, а не строки
+            .forEach(System.out::println); // аналогично записи .forEach(line -> sout(line))
 
         // 2 метод - openConnection
         URLConnection urlConnection = url.openConnection();
