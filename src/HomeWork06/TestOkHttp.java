@@ -41,9 +41,6 @@ public class TestOkHttp {
     private static final String API_VERSION = "2.5";
     private static final String FORECAST = "forecast";
     private static final String ZIP_COUNTRY = "forecast?zip=198097,RU";
-//    private static final String API_VERSION = "v1";
-//    private static final String FORECAST_TYPE = "daily";
-//    private static final String FORECAST_PERIOD = "5day";
 
     // Поля класса для параметров KEY/VALUE
     private static final String SAINT_PETERSBURG_ZIP = "198097,RU";

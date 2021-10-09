@@ -1,10 +1,5 @@
 package HomeWork06;
 
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,8 +7,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
-import java.util.concurrent.TimeUnit;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -45,34 +38,21 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class HomeApp06 {
 
-    // Поля класса для GET запроса после "/"
-    private static final String BASE_HOST = "api.openweathermap.org";
-    private static final String FORECAST_TYPE = "data";
-    private static final String API_VERSION = "2.5";
-    private static final String FORECAST = "forecasts";
-//    private static final String FORECAST = "data/2.5/forecast";
-
-    // Поля класса для параметров KEY/VALUE
-    private static final String SAINT_PETERSBURG_ZIP = "198097,RU";
-    private static final String API_KEY = "7063829f1fd4a64b42f6787514262064";
-    private static final String UNITS = "metric";
-
     public static void main(String[] args) throws IOException {
 
         URL url = new URL("https://api.openweathermap.org/data/2.5/forecast?zip=198097,RU&appid=716cb70e7508d5933ac312eb82eb98bf&units=metric");
 
         // Получаем погоду методом openStream
-//        InputStream in = url.openStream();
-//        new BufferedReader(new InputStreamReader(in, UTF_8))
-//                .lines() // возвращает Stream (поток) строк, а не строки
-//                .forEach(System.out::println); // аналогично записи .forEach(line -> sout(line))
+        InputStream in = url.openStream();
+        new BufferedReader(new InputStreamReader(in, UTF_8))
+                .lines() // возвращает Stream (поток) строк, а не строки
+                .forEach(System.out::println); // аналогично записи .forEach(line -> sout(line))
 
         // HttpURLConnection
         HttpURLConnection httpConect = (HttpsURLConnection) url.openConnection();
         httpConect.connect();
 
+        System.out.println("Отправленный GET запрос: " + httpConect);
         System.out.println("Ответ сервера: " + httpConect.getResponseCode());
-        System.out.println("Погода в СПб: " + httpConect);
-
     }
 }
