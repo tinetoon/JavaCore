@@ -12,6 +12,7 @@
 .idea/
 .vscode/
 out/
+lib/
 
 # Package Files #
 *.jar
