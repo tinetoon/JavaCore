@@ -1,7 +1,7 @@
 package lesson7_project.project;
 
-import ru.geekbrains.qa.java2.lesson7_project.project.enums.Functionality;
-import ru.geekbrains.qa.java2.lesson7_project.project.enums.Periods;
+import lesson7_project.project.enums.Functionality;
+import lesson7_project.project.enums.Periods;
 
 import java.io.IOException;
 import java.util.HashMap;

@@ -5,7 +5,7 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import ru.geekbrains.qa.java2.lesson7_project.project.enums.Periods;
+import lesson7_project.project.enums.Periods;
 
 import java.io.IOException;
 

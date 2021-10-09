@@ -5,9 +5,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import ru.geekbrains.qa.java2.lesson7_project.entity.Car;
-import ru.geekbrains.qa.java2.lesson7_project.entity.Person;
-import ru.geekbrains.qa.java2.lesson7_project.entity.Student;
+import lesson7_project.entity.Car;
+import lesson7_project.entity.Person;
+import lesson7_project.entity.Student;
 
 import java.io.File;
 import java.io.IOException;
