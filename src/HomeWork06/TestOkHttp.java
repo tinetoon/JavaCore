@@ -5,21 +5,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import javax.net.ssl.HttpsURLConnection;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.concurrent.TimeUnit;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Ответственный за создание класса - А.А. Дюжаков
- * Дата создания: 06.10.2021
+ * Дата создания: 09.10.2021
  *
  * 1. С помощью http запроса получить в виде json строки погоду в Санкт-Петербурге
  * на период времени, пересекающийся со следующим занятием
@@ -40,39 +30,60 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  * для получения данных в метрических единицах
  *
  * С дополнительным параметром GET запрос будет выглядеть следующим образом:
- * api.openweathermap.org/data/2.5/forecast?zip=198097,RU&appid=716cb70e7508d5933ac312eb82eb98bf&units=metric
+ * api.openweathermap.org/data/2.5/forecast?zip=198097,RU&appid=7063829f1fd4a64b42f6787514262064&units=metric
  */
 
-public class HomeApp06 {
+public class TestOkHttp {
 
     // Поля класса для GET запроса после "/"
     private static final String BASE_HOST = "api.openweathermap.org";
-    private static final String FORECAST_TYPE = "data";
+    private static final String DATA = "data";
     private static final String API_VERSION = "2.5";
-    private static final String FORECAST = "forecasts";
-//    private static final String FORECAST = "data/2.5/forecast";
+    private static final String FORECAST = "forecast";
+    private static final String ZIP_COUNTRY = "forecast?zip=198097,RU";
+//    private static final String API_VERSION = "v1";
+//    private static final String FORECAST_TYPE = "daily";
+//    private static final String FORECAST_PERIOD = "5day";
 
     // Поля класса для параметров KEY/VALUE
     private static final String SAINT_PETERSBURG_ZIP = "198097,RU";
-    private static final String API_KEY = "7063829f1fd4a64b42f6787514262064";
+    private static final String RUSSIA_CODE = "RU";
+    private static final String APPI_ID = "7063829f1fd4a64b42f6787514262064";
     private static final String UNITS = "metric";
 
     public static void main(String[] args) throws IOException {
 
-        URL url = new URL("https://api.openweathermap.org/data/2.5/forecast?zip=198097,RU&appid=716cb70e7508d5933ac312eb82eb98bf&units=metric");
+        // Создаём клиент для подключения к серверу
+        OkHttpClient client = new OkHttpClient();
 
-        // Получаем погоду методом openStream
-//        InputStream in = url.openStream();
-//        new BufferedReader(new InputStreamReader(in, UTF_8))
-//                .lines() // возвращает Stream (поток) строк, а не строки
-//                .forEach(System.out::println); // аналогично записи .forEach(line -> sout(line))
+        // Создаём URL для отправки GET запроса
+        HttpUrl url = new HttpUrl.Builder()
+                .scheme("https")
+                .host(BASE_HOST)
+                .addPathSegment(DATA)
+                .addPathSegment(API_VERSION)
+                .addPathSegment(FORECAST)
+                .addQueryParameter("zip", SAINT_PETERSBURG_ZIP)
+                .addQueryParameter("appid", APPI_ID)
+                .addQueryParameter("units", UNITS)
+                .build();
 
-        // HttpURLConnection
-        HttpURLConnection httpConect = (HttpsURLConnection) url.openConnection();
-        httpConect.connect();
+        // Выводим в консоль информацию об отправке запроса
+        System.out.println("Отправляем GET запрос: " + url.toString());
 
-        System.out.println("Ответ сервера: " + httpConect.getResponseCode());
-        System.out.println("Погода в СПб: " + httpConect);
+        // Создаём объект отправки запросов на сервер
+        Request request = new Request.Builder()
+                .header("Content-type", "application/json")
+                .url(url)
+                .build();
 
+        // Создаём объект получения ответов с сервера
+        Response response = client.newCall(request).execute();
+
+        // Объявляем строковую переменную и инициализируем её ответом сервера
+        String body = response.body().string();
+
+        System.out.println("Код ответа сервера: " + response.code());
+        System.out.println(body);
     }
 }
