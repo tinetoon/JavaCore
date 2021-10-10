@@ -22,13 +22,12 @@ public class OpenWeatherMap implements WeatherProvider {
     private static final String API_VERSION = "2.5";
     private static final String WEATHER = "weather";
     private static final String FORECAST = "forecast";
-    private static final String DAILY = "daily";
 
     // Поля класса для параметров KEY/VALUE
-    private static String CITI_ZIP = ApplicationGlobalState.getInstance().getSelectedCityZip();
+    private static String citiZip = "null";
     private static final String RUSSIA_CODE = "RU";
     private static final String APPI_ID = ApplicationGlobalState.getInstance().getAPPI_ID_OW();
-    private static String CNT = "5";
+    private static String cnt = "5";
     private static final String UNITS = "metric";
 
 
@@ -39,6 +38,10 @@ public class OpenWeatherMap implements WeatherProvider {
     @Override
     public void getWeather(Periods periods) throws IOException {
 
+        // Устанавливаем значения почтового индекса и периода получения прогноза погоды
+        setCitiZip(ApplicationGlobalState.getInstance().getSelectedCityZip());
+        setCnt(ApplicationGlobalState.getInstance().getSelectedPeriod());
+
         if (periods.equals(Periods.NOW)) {
 
             System.out.println("===== ПРОГНОЗ ПОГОДЫ НА ТЕКУЩУЮ ДАТУ =====");
@@ -46,7 +49,7 @@ public class OpenWeatherMap implements WeatherProvider {
 
         } else {
 
-            System.out.println("===== ПРОГНОЗ ПОГОДЫ НА 5 ДНЕЙ =====");
+            System.out.println("===== ПРОГНОЗ ПОГОДЫ НА " + cnt + " ДНЕЙ =====");
             getWeatherPeriod(client);
 
         }
@@ -63,7 +66,7 @@ public class OpenWeatherMap implements WeatherProvider {
                 .addPathSegment(DATA)
                 .addPathSegment(API_VERSION)
                 .addPathSegment(WEATHER)
-                .addQueryParameter("zip", (CITI_ZIP + "," + RUSSIA_CODE))
+                .addQueryParameter("zip", (citiZip + "," + RUSSIA_CODE))
                 .addQueryParameter("appid", APPI_ID)
                 .addQueryParameter("units", UNITS)
                 .build();
@@ -87,7 +90,7 @@ public class OpenWeatherMap implements WeatherProvider {
         System.out.println(body);
     }
 
-    // Метод запроса погоды на 5 (1-16) дней
+    // Метод запроса погоды на 5 (1-5) дней
     public static void getWeatherPeriod(OkHttpClient client) throws IOException {
 
         // Создаём URL для отправки GET запроса
@@ -97,10 +100,9 @@ public class OpenWeatherMap implements WeatherProvider {
                 .addPathSegment(DATA)
                 .addPathSegment(API_VERSION)
                 .addPathSegment(FORECAST)
-                .addPathSegment(DAILY)
-                .addQueryParameter("zip", (CITI_ZIP + "," + RUSSIA_CODE))
+                .addQueryParameter("zip", (citiZip + "," + RUSSIA_CODE))
                 .addQueryParameter("appid", APPI_ID)
-                .addQueryParameter("cnt", CNT)
+                .addQueryParameter("cnt", cnt)
                 .addQueryParameter("units", UNITS)
                 .build();
 
@@ -125,19 +127,19 @@ public class OpenWeatherMap implements WeatherProvider {
 
     // Геттеры на код города и количество дней погоды
     public static String getCitiZip() {
-        return CITI_ZIP;
+        return citiZip;
     }
-    public static String getCNT() {
-        return CNT;
+    public static String getCnt() {
+        return cnt;
     }
 
     // Сеттер на код города (для присвоения другого кода из пользовательского ввода, см. класс UserInterface)
     public static void setCitiZip(String citiZip) {
-        CITI_ZIP = citiZip;
+        OpenWeatherMap.citiZip = citiZip;
     }
 
     // Сеттер на количество дней погоды (для присвоения значения из пользовательского ввода)
-    public static void setCNT(String CNT) {
-        OpenWeatherMap.CNT = CNT;
+    public static void setCnt(String cnt) {
+        OpenWeatherMap.cnt = cnt;
     }
 }

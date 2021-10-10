@@ -55,13 +55,18 @@ public class UserInterface {
         while (true) {
             System.out.println("Введите ответ:\n" +
                     "0 - погода на текущую дату;\n" +
-                    "5 - погода на 5 дней;\n" + // "от 1 до 16 - погода на период в днях;\n"
+                    "от 1 до 5 - погода на период в днях;\n" + // "от 1 до 5 - погода на период в днях;\n"
                     "др. - выход из приложения.");
 
             String periodWeatherTmp = scanner.nextLine(); // Инициализируем временную переменную для кода города
 
             // Проверяем правильность ввода почтового индекса (!!! вынести в отдельный метод boolean)
-            if (!periodWeatherTmp.equals("1") && !periodWeatherTmp.equals("5")) {
+            if (!periodWeatherTmp.equals("0")
+                    && !periodWeatherTmp.equals("1")
+                    && !periodWeatherTmp.equals("2")
+                    && !periodWeatherTmp.equals("3")
+                    && !periodWeatherTmp.equals("4")
+                    && !periodWeatherTmp.equals("5")) {
                 System.out.println("===== EXIT =====");
                     break;
             } else {
@@ -76,8 +81,9 @@ public class UserInterface {
         }
     }
 
-    // Метод передающий период, введённый пользователем в контроллер
-    private void notifyController(String input) throws IOException {
-        controller.onUserInput(input);
+    // Метод передающий период, введённый пользователем в контроллер и в глобальную переменную
+    private void notifyController(String period) throws IOException {
+        ApplicationGlobalState.getInstance().setSelectedPeriod(period);
+        controller.onUserInput(period);
     }
 }

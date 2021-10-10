@@ -10,6 +10,7 @@ public final class ApplicationGlobalState {
 
     private static ApplicationGlobalState INSTANCE;
     private String selectedCityZip = null;
+    private String selectedPeriod = null;
     private final String APPI_ID_OW = "7063829f1fd4a64b42f6787514262064";
 
     private ApplicationGlobalState() {
@@ -27,12 +28,21 @@ public final class ApplicationGlobalState {
     public String getSelectedCityZip() {
         return selectedCityZip;
     }
+
+    public String getSelectedPeriod() {
+        return selectedPeriod;
+    }
+
     public String getAPPI_ID_OW() {
         return APPI_ID_OW;
     }
 
-    // Сеттер
+    // Сеттеры
     public void setSelectedCity(String selectedCity) {
         this.selectedCityZip = selectedCity;
+    }
+
+    public void setSelectedPeriod(String selectedPeriod) {
+        this.selectedPeriod = selectedPeriod;
     }
 }
