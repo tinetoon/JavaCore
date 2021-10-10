@@ -9,8 +9,8 @@ package HomeWork07;
 public final class ApplicationGlobalState {
 
     private static ApplicationGlobalState INSTANCE;
-    private String selectedCity = null;
-    private final String APPI_ID = "7063829f1fd4a64b42f6787514262064";
+    private String selectedCityZip = null;
+    private final String APPI_ID_OW = "7063829f1fd4a64b42f6787514262064";
 
     private ApplicationGlobalState() {
     }
@@ -24,15 +24,15 @@ public final class ApplicationGlobalState {
     }
 
     // Геттеры
-    public String getSelectedCity() {
-        return selectedCity;
+    public String getSelectedCityZip() {
+        return selectedCityZip;
     }
-    public String getAPPI_ID() {
-        return APPI_ID;
+    public String getAPPI_ID_OW() {
+        return APPI_ID_OW;
     }
 
     // Сеттер
     public void setSelectedCity(String selectedCity) {
-        this.selectedCity = selectedCity;
+        this.selectedCityZip = selectedCity;
     }
 }

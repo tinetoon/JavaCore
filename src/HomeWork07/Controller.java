@@ -22,7 +22,7 @@ public class Controller {
     Map<Integer, Functionality> variantPeriodWeather = new HashMap<>();
 
     public Controller() {
-        this.variantPeriodWeather.put(1, Functionality.GET_NOW_WEATHER);
+        this.variantPeriodWeather.put(0, Functionality.GET_NOW_WEATHER);
         this.variantPeriodWeather.put(5, Functionality.GET_FIVE_DAYS_WEATHER);
     }
 
@@ -44,12 +44,12 @@ public class Controller {
         }
     }
 
-    // Метод устанавливающий значение периода равным единице??? (!!! проверить)
+    // Метод устанавливающий значение периода равным нулю??? (!!! проверить)
     public void getCurrentWeather() throws IOException {
         weatherProvider.getWeather(Periods.NOW);
     }
 
-    public void getWeatherIn5Days() {
-        throw new RuntimeException("Добавить в h/w");
+    public void getWeatherIn5Days() throws IOException {
+        weatherProvider.getWeather(Periods.FIVE_DAYS);
     }
 }
