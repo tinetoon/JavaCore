@@ -1,10 +1,78 @@
 package HomeWork07;
 
+import lesson7_project.project.enums.Periods;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import java.io.IOException;
+
 /**
  * Класс реализации запроса погоды на ресурсе openweathermap.org
  * Ответственный за создание класса - А.А. Дюжаков
  * Дата создания: 09.10.2021
  */
 
-public class OpenWeatherMap {
+public class OpenWeatherMap implements WeatherProvider {
+
+    // Поля класса для GET запроса после "/"
+    private static final String BASE_HOST = "api.openweathermap.org";
+    private static final String DATA = "data";
+    private static final String API_VERSION = "2.5";
+    private static final String FORECAST = "forecast";
+
+    // Поля класса для параметров KEY/VALUE
+    private static String CITI_ZIP = "198097";
+    private static final String RUSSIA_CODE = "RU";
+    private static final String APPI_ID = "7063829f1fd4a64b42f6787514262064";
+    private static final String UNITS = "metric";
+
+    //!!! заменить HomeWork07.enums.Periods periods на Periods periods
+    @Override
+    public void getWeather(HomeWork07.enums.Periods periods) throws IOException {
+
+        // Создаём клиент для подключения к серверу
+        OkHttpClient client = new OkHttpClient();
+
+        // Создаём URL для отправки GET запроса
+        HttpUrl url = new HttpUrl.Builder()
+                .scheme("https")
+                .host(BASE_HOST)
+                .addPathSegment(DATA)
+                .addPathSegment(API_VERSION)
+                .addPathSegment(FORECAST)
+                .addQueryParameter("zip", (CITI_ZIP + "," + RUSSIA_CODE))
+                .addQueryParameter("appid", APPI_ID)
+                .addQueryParameter("units", UNITS)
+                .build();
+
+        // Выводим в консоль информацию об отправке запроса
+        System.out.println("Отправляем GET запрос: " + url.toString());
+
+        // Создаём объект отправки запросов на сервер
+        Request request = new Request.Builder()
+                .header("Content-type", "application/json")
+                .url(url)
+                .build();
+
+        // Создаём объект получения ответов с сервера
+        Response response = client.newCall(request).execute();
+
+        // Объявляем строковую переменную и инициализируем её ответом сервера
+        String body = response.body().string();
+
+        System.out.println("Код ответа сервера: " + response.code());
+        System.out.println(body);
+    }
+
+    // Геттер на код города
+    public static String getCitiZip() {
+        return CITI_ZIP;
+    }
+
+    // Сеттер на код города (для присвоения другого кода из пользовательского ввода, см. класс UserInterface)
+    public static void setCitiZip(String citiZip) {
+        CITI_ZIP = citiZip;
+    }
 }

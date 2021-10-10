@@ -9,5 +9,10 @@ public class HomeApp07 {
 
     public static void main(String[] args) {
 
+        // Создаём объект интерфейса пользователя
+        UserInterface userInterface = new UserInterface();
+
+        // Вызываем запуск приложения
+        userInterface.runApplication();
     }
 }
