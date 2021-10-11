@@ -1,11 +1,13 @@
 package HomeWork07;
 
+import HomeWork07.classes.ListWeather;
+import HomeWork07.classes.Root;
 import HomeWork07.enums.Periods;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.json.simple.parser.ParseException;
+//import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
@@ -56,13 +58,21 @@ public class OpenWeatherMap implements WeatherProvider {
         } else {
 
             System.out.println("===== ПРОГНОЗ ПОГОДЫ НА " + cnt + " ДНЕЙ =====");
-//            printWeatherPeriod(client);
-            weatherResponse.setStringWeatherResponse(getWeatherPeriod(client));
-            try {
-                System.out.println("Температура: " + weatherResponse.getTemperature() + " градусов.");
-            } catch (ParseException e) {
-                e.printStackTrace();
+            Root weatherList = weatherResponse.getTemperature();
+            System.out.println("Прогноз погоды для города: " + weatherList.getCity());
+            for (Object it: weatherList.getList()) {
+                ListWeather list = (ListWeather) it;
+                if (list.getMain().getHour() == 0) {
+                    System.out.println("Дата: " + list.getDt_txt() + "Температура: " + list.getMain().getTemp());
+                }
             }
+//            printWeatherPeriod(client);
+//            weatherResponse.setStringWeatherResponse(getWeatherPeriod(client));
+//            try {
+//                System.out.println("Температура: " + weatherResponse.getTemperature() + " градусов.");
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
         }
 
     }
