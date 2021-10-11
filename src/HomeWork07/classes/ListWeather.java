@@ -6,17 +6,16 @@ package HomeWork07.classes;
  * Дата создания: 11.10.2021
  */
 
-public class List {
+public class ListWeather {
     private float dt;
     Main MainObject;
 //    ArrayList < Object > weather = new ArrayList < Object > ();
 //    Clouds CloudsObject;
 //    Wind WindObject;
-    private float visibility;
-    private float pop;
+//    private float visibility;
+//    private float pop;
 //    Sys SysObject;
     private String dt_txt;
-
 
     // Getter Methods
 
@@ -36,13 +35,13 @@ public class List {
 //        return WindObject;
 //    }
 
-    public float getVisibility() {
-        return visibility;
-    }
+//    public float getVisibility() {
+//        return visibility;
+//    }
 
-    public float getPop() {
-        return pop;
-    }
+//    public float getPop() {
+//        return pop;
+//    }
 
 //    public Sys getSys() {
 //        return SysObject;
@@ -70,13 +69,13 @@ public class List {
 //        this.WindObject = windObject;
 //    }
 
-    public void setVisibility(float visibility) {
-        this.visibility = visibility;
-    }
+//    public void setVisibility(float visibility) {
+//        this.visibility = visibility;
+//    }
 
-    public void setPop(float pop) {
-        this.pop = pop;
-    }
+//    public void setPop(float pop) {
+//        this.pop = pop;
+//    }
 
 //    public void setSys(Sys sysObject) {
 //        this.SysObject = sysObject;
