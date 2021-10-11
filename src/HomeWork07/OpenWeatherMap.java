@@ -5,6 +5,7 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
@@ -57,7 +58,11 @@ public class OpenWeatherMap implements WeatherProvider {
             System.out.println("===== ПРОГНОЗ ПОГОДЫ НА " + cnt + " ДНЕЙ =====");
 //            printWeatherPeriod(client);
             weatherResponse.setStringWeatherResponse(getWeatherPeriod(client));
-            System.out.println("Температура: " + weatherResponse.getTemperature() + " градусов.");
+            try {
+                System.out.println("Температура: " + weatherResponse.getTemperature() + " градусов.");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
 
     }

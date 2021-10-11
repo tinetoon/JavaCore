@@ -1,8 +1,15 @@
 package HomeWork07;
 
+import HomeWork07.classes.ListWeather;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.util.ArrayList;
 
 /**
  * Класс ответа от сервера
@@ -33,7 +40,8 @@ public class WeatherResponse {
     // Создаём объект с помощбю билиотеки jackson для доступа к данным Json строки по ключу
     ObjectMapper objectMapper = new ObjectMapper();
 
-    // Создаём массив данных
+    ListWeather listWeather = new ListWeather(); // Объект погодного листа
+    JSONParser parser = new JSONParser(); // Объект парсера
 
     // Метод, возврашающий текущую погоду
     public double getTemperatureNow() throws JsonProcessingException {
@@ -43,11 +51,16 @@ public class WeatherResponse {
     }
 
     // Метод, возвращающий температуру за пять дней (!!! требуется описание логики)
-    public double getTemperature() throws JsonProcessingException {
+    public double getTemperature() throws JsonProcessingException, ParseException {
+
+        JSONObject listWeatherObject = (JSONObject) parser.parse(stringWeatherResponse); // Массив данных для массива list
+        JSONArray listWeatherJArr = (JSONArray) listWeatherObject.get(TAG_LIST);
 
         JsonNode temperatureNode = objectMapper.readTree(stringWeatherResponse).at("/list/main/temp");
 
         return temperatureNode.asDouble();
+
+
     }
 
     public String getStringWeatherResponse() {
