@@ -6,20 +6,20 @@ package HomeWork07.classes;
  * Дата создания: 11.10.2021
  */
 
-public class ListWeather {
-    private float dt;
+public class ListWeather<T extends Number> {
+    private T dt;
     Main MainObject;
     private String dt_txt;
 
     // Конструктор
-    public ListWeather(float dt, Main mainObject, String dt_txt) {
+    public ListWeather(T dt, Main mainObject, String dt_txt) {
         this.dt = dt;
         MainObject = mainObject;
         this.dt_txt = dt_txt;
     }
 
     // Getter Methods
-    public float getDt() {
+    public T getDt() {
         return dt;
     }
     public Main getMain() {

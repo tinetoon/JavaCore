@@ -58,13 +58,12 @@ public class OpenWeatherMap implements WeatherProvider {
         } else {
 
             System.out.println("===== ПРОГНОЗ ПОГОДЫ НА " + cnt + " ДНЕЙ =====");
+            weatherResponse.setStringWeatherResponse(getWeatherPeriod(client));
             Root weatherList = weatherResponse.getTemperature();
-            System.out.println("Прогноз погоды для города: " + weatherList.getCity());
+            System.out.println("Прогноз погоды для города: " + weatherList.getCity().getName());
             for (Object it: weatherList.getList()) {
                 ListWeather list = (ListWeather) it;
-                if (list.getMain().getHour() == 0) {
-                    System.out.println("Дата: " + list.getDt_txt() + "Температура: " + list.getMain().getTemp());
-                }
+                    System.out.println("Дата: " + list.getDt_txt() + "; Температура: " + list.getMain().getTemp());
             }
 //            printWeatherPeriod(client);
 //            weatherResponse.setStringWeatherResponse(getWeatherPeriod(client));

@@ -5,16 +5,16 @@ package HomeWork07.classes;
  * Дата создания: 11.10.2021
  */
 
-public class Main {
-    private float temp;
-    private float feelsLike;
-    private float tempMin;
-    private float tempMax;
-    private float pressure;
-    private float seaLevel;
-    private float grndLevel;
-    private float humidity;
-    private float tempKf;
+public class Main<T extends Number> {
+    private T temp;
+    private T feelsLike;
+    private T tempMin;
+    private T tempMax;
+    private T pressure;
+    private T seaLevel;
+    private T grndLevel;
+    private T humidity;
+    private T tempKf;
     private int day = 0;
     private int hour = 0;
 
@@ -32,31 +32,31 @@ public class Main {
     }
 
     // Getter Methods
-    public float getTemp() {
+    public T getTemp() {
         return temp;
     }
-    public float getFeelsLike() {
+    public T getFeelsLike() {
         return feelsLike;
     }
-    public float getTempMin() {
+    public T getTempMin() {
         return tempMin;
     }
-    public float getTempMax() {
+    public T getTempMax() {
         return tempMax;
     }
-    public float getPressure() {
+    public T getPressure() {
         return pressure;
     }
-    public float getSeaLevel() {
+    public T getSeaLevel() {
         return seaLevel;
     }
-    public float getGrndLevel() {
+    public T getGrndLevel() {
         return grndLevel;
     }
-    public float getHumidity() {
+    public T getHumidity() {
         return humidity;
     }
-    public float getTempKf() {
+    public T getTempKf() {
         return tempKf;
     }
     public int getDay() {
@@ -67,31 +67,31 @@ public class Main {
     }
 
     // Setter Methods
-    public void setTemp(float temp) {
+    public void setTemp(T temp) {
         this.temp = temp;
     }
-    public void setFeelsLike(float feelsLike) {
+    public void setFeelsLike(T feelsLike) {
         this.feelsLike = feelsLike;
     }
-    public void setTempMin(float tempMin) {
+    public void setTempMin(T tempMin) {
         this.tempMin = tempMin;
     }
-    public void setTempMax(float tempMax) {
+    public void setTempMax(T tempMax) {
         this.tempMax = tempMax;
     }
-    public void setPressure(float pressure) {
+    public void setPressure(T pressure) {
         this.pressure = pressure;
     }
-    public void setSeaLevel(float seaLevel) {
+    public void setSeaLevel(T seaLevel) {
         this.seaLevel = seaLevel;
     }
-    public void setGrndLevel(float grndLevel) {
+    public void setGrndLevel(T grndLevel) {
         this.grndLevel = grndLevel;
     }
-    public void setHumidity(float humidity) {
+    public void setHumidity(T humidity) {
         this.humidity = humidity;
     }
-    public void setTempKf(float tempKf) {
+    public void setTempKf(T tempKf) {
         this.tempKf = tempKf;
     }
 }

@@ -28,7 +28,7 @@ public class WeatherResponse {
     // Финальные переменные для доступа к полям Json строки
     public static final String TAG_COD = "cod";
     public static final String TAG_LIST = "list";
-    public static final String TAG_LIST_DT = "";
+    public static final String TAG_LIST_DT = "dt";
     public static final String TAG_LIST_MAIN = "main";
     public static final String TAG_LIST_MAIN_TEMP = "temp";
     public static final String TAG_LIST_MAIN_FEELS_LIKE = "feels_like";
@@ -77,19 +77,19 @@ public class WeatherResponse {
             for (Object it: listWeatherJArr) {
                 JSONObject listWeatherJObject = (JSONObject) it;
 
-                float dt = (float) listWeatherJObject.get(TAG_LIST_DT);
+                long dt = (long) listWeatherJObject.get(TAG_LIST_DT);
 
                 JSONObject mainJObject = (JSONObject) listWeatherJObject.get(TAG_LIST_MAIN);
                 Main main = new Main();
-                main.setTemp((float) mainJObject.get(TAG_LIST_MAIN_TEMP));
-                main.setFeelsLike((float) mainJObject.get(TAG_LIST_MAIN_FEELS_LIKE));
-                main.setTempMin((float) mainJObject.get(TAG_LIST_MAIN_TEMP_MIN));
-                main.setTempMax((float) mainJObject.get(TAG_LIST_MAIN_TEMP_MAX));
-                main.setPressure((float) mainJObject.get(TAG_LIST_MAIN_PRESSURE));
-                main.setSeaLevel((float) mainJObject.get(TAG_LIST_MAIN_SEA_LEVEL));
-                main.setGrndLevel((float) mainJObject.get(TAG_LIST_MAIN_GRND_LEVEL));
-                main.setHumidity((float) mainJObject.get(TAG_LIST_MAIN_HUMIDITY));
-                main.setTempKf((float) mainJObject.get(TAG_LIST_MAIN_TEMP_KF));
+                main.setTemp((Number) mainJObject.get(TAG_LIST_MAIN_TEMP));
+                main.setFeelsLike((Number) mainJObject.get(TAG_LIST_MAIN_FEELS_LIKE));
+                main.setTempMin((Number) mainJObject.get(TAG_LIST_MAIN_TEMP_MIN));
+                main.setTempMax((Number) mainJObject.get(TAG_LIST_MAIN_TEMP_MAX));
+                main.setPressure((Number) mainJObject.get(TAG_LIST_MAIN_PRESSURE));
+                main.setSeaLevel((Number) mainJObject.get(TAG_LIST_MAIN_SEA_LEVEL));
+                main.setGrndLevel((Number) mainJObject.get(TAG_LIST_MAIN_GRND_LEVEL));
+                main.setHumidity((Number) mainJObject.get(TAG_LIST_MAIN_HUMIDITY));
+                main.setTempKf((Number) mainJObject.get(TAG_LIST_MAIN_TEMP_KF));
 
                 String dtTXt = (String) listWeatherJObject.get(TAG_LIST_DT_TXT);
 
