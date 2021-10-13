@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class Controller {
 
-    // Создаём объект провайдера погоды (!!! описать конструктор в классе OpenWeatherMap)
+    // Создаём объект провайдера погоды
     WeatherProvider weatherProvider = new OpenWeatherMap();
 
     // Поле класса для проверки вариантов ввода
@@ -30,6 +30,7 @@ public class Controller {
         this.variantPeriodWeather.put(5, Functionality.GET_FIVE_DAYS_WEATHER);
     }
 
+    // Проверка ввода пользователя (!!! код взят с урока, разобраться с логикой)
     public void onUserInput(String input) throws IOException {
 
         int period = Integer.parseInt(input);

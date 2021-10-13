@@ -7,7 +7,6 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-//import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
@@ -51,7 +50,6 @@ public class OpenWeatherMap implements WeatherProvider {
         if (periods.equals(Periods.NOW)) {
 
             System.out.println("===== ПРОГНОЗ ПОГОДЫ НА ТЕКУЩУЮ ДАТУ =====");
-//            printWeatherNow(client);
             weatherResponse.setStringWeatherResponse(getWeatherNow(client));
             System.out.println("Температура: " + weatherResponse.getTemperatureNow() + " градусов.");
 
@@ -63,17 +61,9 @@ public class OpenWeatherMap implements WeatherProvider {
             System.out.println("Прогноз погоды для города: " + weatherList.getCity().getName());
             for (Object it: weatherList.getList()) {
                 ListWeather list = (ListWeather) it;
-                    System.out.println("Дата: " + list.getDt_txt() + "; Температура: " + list.getMain().getTemp());
+                System.out.println("Дата: " + list.getDt_txt() + "; Температура: " + list.getMain().getTemp());
             }
-//            printWeatherPeriod(client);
-//            weatherResponse.setStringWeatherResponse(getWeatherPeriod(client));
-//            try {
-//                System.out.println("Температура: " + weatherResponse.getTemperature() + " градусов.");
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
         }
-
     }
 
     // Метод запроса погоды на текущую дату

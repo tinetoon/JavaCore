@@ -32,7 +32,7 @@ public class UserInterface {
             String citiZipTmp = scanner.nextLine(); // Инициализируем временную переменную для кода города
 
             // Проверяем правильность ввода почтового индекса (!!! вынести в отдельный метод boolean)
-            if (!citiZipTmp.equals("198097") && !citiZipTmp.equals("198217")) {
+            if (!citiZipTmp.equals("198097") && !citiZipTmp.equals("198217") && !citiZipTmp.equals("184682")) { // 184682 - Снежногорск, Мурманская обл.
                 System.out.println("Введён неверный почтовый индекс, повторите ввод.");
 //                    break;
             } else {
@@ -71,7 +71,7 @@ public class UserInterface {
                     break;
             } else {
                 System.out.println("Выбран период: " + periodWeatherTmp);
-//                break; // * - заменить выход на логику (см. строку 71)
+
                 try {
                     notifyController(periodWeatherTmp); // отправляем значение в контроллер и обрабатываем исключения
                 } catch (IOException e) {

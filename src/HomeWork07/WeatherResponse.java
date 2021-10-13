@@ -53,14 +53,7 @@ public class WeatherResponse {
         return temperatureNode.asDouble(); // возвращаем полученное значение, приведённое к типу double
     }
 
-    // Метод, возвращающий температуру за пять дней (!!! требуется описание логики)
-//    public double getTemperature() throws JsonProcessingException {
-//
-//        JsonNode temperatureNode = objectMapper.readTree(stringWeatherResponse).at("/list/main/temp");
-//        return temperatureNode.asDouble();
-//    }
-
-    // Метод парсинга ответа сервера
+    // Метод парсинга и возврата ответа сервера в виде объекта
     public Root getTemperature() {
 
         Root root = new Root(); // Создаём объект класса Root
@@ -111,10 +104,12 @@ public class WeatherResponse {
         }
     }
 
+    // Геттер (!!! не используется в приложении)
     public String getStringWeatherResponse() {
         return stringWeatherResponse;
     }
 
+    // Сеттер
     public void setStringWeatherResponse(String stringWeatherResponse) {
         this.stringWeatherResponse = stringWeatherResponse;
     }
