@@ -60,7 +60,7 @@ public class UserInterface {
 
             String periodWeatherTmp = scanner.nextLine(); // Инициализируем временную переменную для кода города
 
-            // Проверяем правильность ввода почтового индекса (!!! вынести в отдельный метод boolean)
+            // Проверяем правильность ввода периода (!!! вынести в отдельный метод boolean)
             if (!periodWeatherTmp.equals("0")
                     && !periodWeatherTmp.equals("1")
                     && !periodWeatherTmp.equals("2")
@@ -83,7 +83,10 @@ public class UserInterface {
 
     // Метод передающий период, введённый пользователем в контроллер и в глобальную переменную
     private void notifyController(String period) throws IOException {
-        ApplicationGlobalState.getInstance().setSelectedPeriod(period);
+        int dayPeriod = Integer.valueOf(period);
+        int hourPeriod = dayPeriod * 8; // В каждом суточном прогнозе восемь трёхчасовых периодов
+        ApplicationGlobalState.getInstance().setSelectedDayPeriod(period);
+        ApplicationGlobalState.getInstance().setSelectedHourPeriod(Integer.toString(hourPeriod));
         controller.onUserInput(period);
     }
 }

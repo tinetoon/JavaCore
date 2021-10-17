@@ -29,7 +29,7 @@ public class OpenWeatherMap implements WeatherProvider {
     private static String citiZip = "null";
     private static final String RUSSIA_CODE = "RU";
     private static final String APPI_ID = ApplicationGlobalState.getInstance().getAPPI_ID_OW();
-    private static String cnt = "5";
+    private static String cnt = "40";
     private static final String UNITS = "metric";
 
 
@@ -45,7 +45,7 @@ public class OpenWeatherMap implements WeatherProvider {
 
         // Устанавливаем значения почтового индекса и периода получения прогноза погоды
         setCitiZip(ApplicationGlobalState.getInstance().getSelectedCityZip());
-        setCnt(ApplicationGlobalState.getInstance().getSelectedPeriod());
+        setCnt(ApplicationGlobalState.getInstance().getSelectedHourPeriod());
 
         if (periods.equals(Periods.NOW)) {
 
@@ -55,13 +55,18 @@ public class OpenWeatherMap implements WeatherProvider {
 
         } else {
 
-            System.out.println("===== ПРОГНОЗ ПОГОДЫ НА " + cnt + " ДНЕЙ =====");
+            System.out.println("===== ПРОГНОЗ ПОГОДЫ НА " + ApplicationGlobalState.getInstance().getSelectedDayPeriod() + " ДНЕЙ =====");
             weatherResponse.setStringWeatherResponse(getWeatherPeriod(client));
             Root weatherList = weatherResponse.getTemperature();
             System.out.println("Прогноз погоды для города: " + weatherList.getCity().getName());
             for (Object it: weatherList.getList()) {
                 ListWeather list = (ListWeather) it;
-                System.out.println("Дата: " + list.getDt_txt() + "; Температура: " + list.getMain().getTemp());
+//                String time1 = Character.toString(list.getDt_txt().charAt(11));
+//                String time2 = Character.toString(list.getDt_txt().charAt(12));
+                if (list.getDt_txt().charAt(11) == '0' && list.getDt_txt().charAt(12) == '0') {
+//                if (time1.equals("0") && time2.equals("0")) {
+                    System.out.println("Дата: " + list.getDt_txt() + "; Температура: " + list.getMain().getTemp());
+                }
             }
         }
     }
