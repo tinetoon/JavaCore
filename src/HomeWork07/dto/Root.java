@@ -5,36 +5,49 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
+import java.util.List;
+
 /**
  * Ответственный за создание класса - А.А. Дюжаков
  * Дата создания: 19.10.2021
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true) // Игнорируем лишние поля из строки JSON
-public class MainDto {
+public class Root {
 
     // Поля класса
-    @JsonProperty("temp")
-    private Double temperature;
+    @JsonProperty("list")
+    private List<ListWeather> listWeather;
+    @JsonProperty("city")
+    private City city;
 
     // Пустой конструктор (для работы с библиотекой jackson)
-    public MainDto() {
+    public Root() {
     }
 
     // Конструктор
-    public MainDto(double temperature) {
-        this.temperature = temperature;
+    public Root(List<ListWeather> listWeather, City city) {
+        this.listWeather = listWeather;
+        this.city = city;
     }
 
     // Геттеры
-    @JsonGetter("temp")
-    public Double getTemperature() {
-        return temperature;
+    @JsonGetter("list")
+    public List<ListWeather> getListWeather() {
+        return listWeather;
+    }
+    @JsonGetter("city")
+    public City getCity() {
+        return city;
     }
 
     // Сеттеры
-    @JsonSetter("temp")
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
+    @JsonSetter("list")
+    public void setListWeather(List<ListWeather> listWeather) {
+        this.listWeather = listWeather;
+    }
+    @JsonSetter("city")
+    public void setCity(City city) {
+        this.city = city;
     }
 }

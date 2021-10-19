@@ -11,28 +11,28 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true) // Игнорируем лишние поля из строки JSON
-public class ListWeatherDto {
+public class ListWeather {
 
     // Поля класса
     @JsonProperty("main")
-    private MainDto mainDto;
+    private Main main;
     @JsonProperty("dt_txt")
     private String dataAndTime;
 
     // Пустой конструктор (для работы с библиотекой jackson)
-    public ListWeatherDto() {
+    public ListWeather() {
     }
 
     // Конструктор
-    public ListWeatherDto(MainDto mainDto, String dataAndTime) {
-        this.mainDto = mainDto;
+    public ListWeather(Main main, String dataAndTime) {
+        this.main = main;
         this.dataAndTime = dataAndTime;
     }
 
     // Геттеры
     @JsonGetter("main")
-    public MainDto getMainDto() {
-        return mainDto;
+    public Main getMainDto() {
+        return main;
     }
     @JsonGetter("dt_txt")
     public String getDataAndTime() {
@@ -41,8 +41,8 @@ public class ListWeatherDto {
 
     // Сеттеры
     @JsonSetter("main")
-    public void setMainDto(MainDto mainDto) {
-        this.mainDto = mainDto;
+    public void setMainDto(Main main) {
+        this.main = main;
     }
     @JsonSetter("dt_txt")
     public void setDataAndTime(String dataAndTime) {

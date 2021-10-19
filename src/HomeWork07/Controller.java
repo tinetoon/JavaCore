@@ -1,12 +1,10 @@
 package HomeWork07;
 
-import HomeWork07.classes.DataWeather;
 import HomeWork07.enums.Functionality;
 import HomeWork07.enums.Periods;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,10 +38,6 @@ public class Controller {
     public void onUserInput(String input) throws IOException {
 
         int value = Integer.parseInt(input);
-
-//        if (!variantPeriodWeather.containsKey(value)) {
-//            throw new IOException("Для ввода: " + value + " отсутствует прогноз погоды");
-//        }
 
         switch (variantPeriodWeather.get(value)) {
             case GET_NOW_WEATHER:

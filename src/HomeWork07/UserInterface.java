@@ -34,11 +34,10 @@ public class UserInterface {
             // Проверяем правильность ввода почтового индекса (!!! вынести в отдельный метод boolean)
             if (!citiZipTmp.equals("198097") && !citiZipTmp.equals("198217") && !citiZipTmp.equals("184682")) { // 184682 - Снежногорск, Мурманская обл.
                 System.out.println("Введён неверный почтовый индекс, повторите ввод.");
-//                    break;
             } else {
                 setGlobalCity(citiZipTmp);
                 System.out.println("Выбран г. Санкт-Петербург, почтовый индекс: " + citiZipTmp);
-                break; // * - заменить выход на логику
+                break;
             }
 
         }

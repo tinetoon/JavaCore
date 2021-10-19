@@ -11,18 +11,18 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true) // Игнорируем лишние поля из строки JSON
-public class CityDto {
+public class City {
 
     // Поля класса
     @JsonProperty("name")
     private String cityName;
 
     // Пустой конструктор (для работы с библиотекой jackson)
-    public CityDto() {
+    public City() {
     }
 
     // Конструктор
-    public CityDto(String cityName) {
+    public City(String cityName) {
         this.cityName = cityName;
     }
 

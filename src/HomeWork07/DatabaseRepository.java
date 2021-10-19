@@ -1,7 +1,6 @@
 package HomeWork07;
 
 import HomeWork07.classes.DataWeather;
-import HomeWork07.classes.Root;
 
 import java.io.IOException;
 import java.sql.SQLException;
