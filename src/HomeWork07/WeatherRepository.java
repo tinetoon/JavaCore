@@ -3,10 +3,7 @@ package HomeWork07;
 import HomeWork07.classes.DataWeather;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 /**
@@ -22,7 +19,7 @@ import java.util.List;
  * 5. Учесть, что соединение всегда нужно закрывать
  */
 
-public class Repository implements DatabaseRepository {
+public class WeatherRepository implements DatabaseRepository {
 
     // Поля класса
     private String filename;
@@ -34,6 +31,7 @@ public class Repository implements DatabaseRepository {
             "temperature REAL NOT NULL,\n" +
             ");";
     private final String INSERT_WEATHER_QUERY = "INSERT INTO weather (city, date_time, weather_text, temperature) VALUES (?,?,?,?)";
+    private final String READ_WEATHER_QUERY = "SELECT * FROM weather";
 
     // Статический блок для инициализации драйвера работы с БД
     static {
@@ -45,7 +43,7 @@ public class Repository implements DatabaseRepository {
     }
 
     // Конструктор класса
-    public Repository() {
+    public WeatherRepository() {
         this.filename = ApplicationGlobalState.getInstance().getDATABASE_FILE_NAME();
     }
 
@@ -83,6 +81,27 @@ public class Repository implements DatabaseRepository {
     @Override
     public List<DataWeather> getAllSavedData() throws IOException {
         throw new IOException("Not implemented exception");
+    }
+
+    // Метод печати в консоль базы данных погоды
+    @Override
+    public void printDataBase(List<DataWeather> list) throws IOException {
+        try (Connection newConnection = getConnection();
+        Statement printWeather = newConnection.createStatement()) {
+            ResultSet result = printWeather.executeQuery(READ_WEATHER_QUERY);
+            while (result.next()) {
+                System.out.println(
+                    result.getInt(1) + " | " +
+                    result.getString(2) + " | " +
+                    result.getString(3) + " | " +
+                    result.getString(4) + " | " +
+                    result.getDouble(5)
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        throw new IOException("Ошибка печати БД с погодой"); // Создаём сообщение об ошибке для выброса на верх
     }
 
 }

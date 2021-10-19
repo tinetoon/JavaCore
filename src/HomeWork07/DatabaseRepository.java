@@ -18,4 +18,6 @@ public interface DatabaseRepository {
     boolean saveWeatherData(DataWeather dataWeather) throws SQLException;
 
     List<DataWeather> getAllSavedData() throws IOException;
+
+    void printDataBase(List<DataWeather> allSavedData) throws IOException;
 }
