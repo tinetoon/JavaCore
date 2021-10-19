@@ -56,20 +56,25 @@ public class UserInterface {
             System.out.println("Введите ответ:\n" +
                     "0 - погода на текущую дату;\n" +
                     "от 1 до 5 - погода на период в днях;\n" + // "от 1 до 5 - погода на период в днях;\n"
+                    "6 - для чтения данных из БД\n" +
                     "др. - выход из приложения.");
 
-            String periodWeatherTmp = scanner.nextLine(); // Инициализируем временную переменную для кода города
+            String inputUserTmp = scanner.nextLine(); // Инициализируем временную переменную для кода города
 
             // Проверяем правильность ввода периода (!!! вынести в отдельный метод boolean)
-            if (!periodWeatherTmp.equals("0")
-                    && !periodWeatherTmp.equals("1")
-                    && !periodWeatherTmp.equals("2")
-                    && !periodWeatherTmp.equals("3")
-                    && !periodWeatherTmp.equals("4")
-                    && !periodWeatherTmp.equals("5")) {
+            if (!inputUserTmp.equals("0")
+                    && !inputUserTmp.equals("1")
+                    && !inputUserTmp.equals("2")
+                    && !inputUserTmp.equals("3")
+                    && !inputUserTmp.equals("4")
+                    && !inputUserTmp.equals("5")
+                    && !inputUserTmp.equals("6")) {
                 System.out.println("===== EXIT =====");
                     break;
+            } if (inputUserTmp.equals("6")) {
+                System.out.println("===== Выполняем запрос в БД =====");
             } else {
+                String periodWeatherTmp = inputUserTmp;
                 System.out.println("Выбран период: " + periodWeatherTmp);
 
                 try {
@@ -82,11 +87,14 @@ public class UserInterface {
     }
 
     // Метод передающий период, введённый пользователем в контроллер и в глобальную переменную
-    private void notifyController(String period) throws IOException {
-        int dayPeriod = Integer.valueOf(period);
-        int hourPeriod = dayPeriod * 8; // В каждом суточном прогнозе восемь трёхчасовых периодов
-        ApplicationGlobalState.getInstance().setSelectedDayPeriod(period);
-        ApplicationGlobalState.getInstance().setSelectedHourPeriod(Integer.toString(hourPeriod));
-        controller.onUserInput(period);
+    private void notifyController(String value) throws IOException {
+        if (!value.equals("6")) {
+            String period = value;
+            int dayPeriod = Integer.valueOf(period);
+            int hourPeriod = dayPeriod * 8; // В каждом суточном прогнозе восемь трёхчасовых периодов
+            ApplicationGlobalState.getInstance().setSelectedDayPeriod(period);
+            ApplicationGlobalState.getInstance().setSelectedHourPeriod(Integer.toString(hourPeriod));
+        }
+        controller.onUserInput(value);
     }
 }

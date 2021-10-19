@@ -2,6 +2,7 @@ package HomeWork07;
 
 import HomeWork07.classes.ListWeather;
 import HomeWork07.classes.Root;
+import HomeWork07.dto.ListWeatherDto;
 import HomeWork07.enums.Periods;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -55,17 +56,26 @@ public class OpenWeatherMap implements WeatherProvider {
 
         } else {
 
+//            System.out.println("===== ПРОГНОЗ ПОГОДЫ НА " + ApplicationGlobalState.getInstance().getSelectedDayPeriod() + " ДНЕЙ =====");
+//            weatherResponse.setStringWeatherResponse(getWeatherPeriod(client));
+//            Root weatherList = weatherResponse.getTemperature();
+//            System.out.println("Прогноз погоды для города: " + weatherList.getCity().getName());
+//            for (Object it: weatherList.getList()) {
+//                ListWeather list = (ListWeather) it;
+//                if (list.getDt_txt().charAt(11) == '0' && list.getDt_txt().charAt(12) == '0') {
+//                    System.out.println("Дата: " + list.getDt_txt() + "; Температура: " + list.getMain().getTemp());
+//                }
+//            }
+
             System.out.println("===== ПРОГНОЗ ПОГОДЫ НА " + ApplicationGlobalState.getInstance().getSelectedDayPeriod() + " ДНЕЙ =====");
             weatherResponse.setStringWeatherResponse(getWeatherPeriod(client));
-            Root weatherList = weatherResponse.getTemperature();
-            System.out.println("Прогноз погоды для города: " + weatherList.getCity().getName());
-            for (Object it: weatherList.getList()) {
-                ListWeather list = (ListWeather) it;
-//                String time1 = Character.toString(list.getDt_txt().charAt(11));
-//                String time2 = Character.toString(list.getDt_txt().charAt(12));
-                if (list.getDt_txt().charAt(11) == '0' && list.getDt_txt().charAt(12) == '0') {
-//                if (time1.equals("0") && time2.equals("0")) {
-                    System.out.println("Дата: " + list.getDt_txt() + "; Температура: " + list.getMain().getTemp());
+            System.out.println("Прогноз погоды для города: " + weatherResponse
+                    .getTemperatureAfterParsing()
+                    .getCity()
+                    .getCityName());
+            for (ListWeatherDto it: weatherResponse.getTemperatureAfterParsing().getListWeather()) {
+                if (it.getDataAndTime().charAt(11) == '0' && it.getDataAndTime().charAt(12) == '9') {
+                    System.out.println("Дата: " + it.getDataAndTime() + ", Температура: " + it.getMainDto().getTemperature());
                 }
             }
         }

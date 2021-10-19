@@ -50,9 +50,9 @@ public class Repository implements DatabaseRepository {
         this.filename = ApplicationGlobalState.getInstance().getDATABASE_FILE_NAME();
     }
 
-    // Метод возвращающий объект соединения с базой данных (!!! добавить имя файла в URL)
+    // Метод возвращающий объект соединения с базой данных
     private Connection getConnection() throws SQLException {
-        Connection myConnection = DriverManager.getConnection("jdbc:sqlite:" + filename);
+        Connection myConnection = DriverManager.getConnection("jdbc:sqlite:" + filename); // Параметры (драйвер менеджер:тип драйвера:путь до БД - jdbc:sqlite:filename)
         return myConnection;
     }
 
@@ -65,7 +65,7 @@ public class Repository implements DatabaseRepository {
         }
     }
 
-    // Метод возвращающий результат сохранения данных в БД
+    // Метод возвращающий результат сохранения данных в БД (!!! проверить возврат ошибки в нормальном режиме работы)
     @Override
     public boolean saveWeatherData(DataWeather dataWeather) throws SQLException {
         try (Connection newConnection = getConnection(); // Конструкция try-with-resources автоматически закрывает ресурсы, открытые в блоке try
@@ -80,7 +80,7 @@ public class Repository implements DatabaseRepository {
         throw new SQLException("Ошибка при сохранении строки с погодой в БД"); // Создаём сообщение об ошибке для выброса на верх
     }
 
-    // Код взят с урока (!!! разобраться с логикой)
+    // Метод возвращающий лист с данными из БД (!!! дописать логику)
     @Override
     public List<DataWeather> getAllSavedData() throws IOException {
         throw new IOException("Not implemented exception");
