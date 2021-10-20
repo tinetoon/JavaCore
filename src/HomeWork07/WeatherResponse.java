@@ -1,6 +1,7 @@
 package HomeWork07;
 
 import HomeWork07.dto.Root;
+import HomeWork07.dto.RootNow;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,6 +25,17 @@ public class WeatherResponse {
 
         JsonNode temperatureNode = objectMapper.readTree(stringWeatherResponse).at("/main/temp");
         return temperatureNode.asDouble(); // возвращаем полученное значение, приведённое к типу double
+    }
+
+    // Метод парсинга и возврата ответа сервера в виде объекта (парсинг с помощью библиотеки jackson)
+    public RootNow getTemperatureNowAfterParsing() {
+        try {
+            RootNow root = objectMapper.readValue(stringWeatherResponse, RootNow.class);
+            return root;
+        } catch (JsonProcessingException e) {
+            System.out.println("Ошибка парсинга: " + e.toString());
+        }
+        return null;
     }
 
     // Метод парсинга и возврата ответа сервера в виде объекта (парсинг с помощью библиотеки jackson)

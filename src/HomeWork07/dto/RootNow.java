@@ -7,26 +7,28 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * Ответственный за создание класса - А.А. Дюжаков
- * Дата создания: 19.10.2021
+ * Дата создания: 20.10.2021
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true) // Игнорируем лишние поля из строки JSON
-public class ListWeather {
+public class RootNow {
 
     // Поля класса
     @JsonProperty("main")
     private Main main;
-    @JsonProperty("dt_txt")
-    private String dataAndTime;
+    @JsonProperty("dt")
+    private Long data;
+    @JsonProperty("name")
+    private String cityName;
 
     // Пустой конструктор (для работы с библиотекой jackson)
-    public ListWeather() {
+    public RootNow() {
     }
 
     // Конструктор
-    public ListWeather(Main main, String dataAndTime) {
+    public RootNow(Main main, String cityName) {
         this.main = main;
-        this.dataAndTime = dataAndTime;
+        this.cityName = cityName;
     }
 
     // Геттеры
@@ -34,18 +36,26 @@ public class ListWeather {
     public Main getMain() {
         return main;
     }
-    @JsonGetter("dt_txt")
-    public String getDataAndTime() {
-        return dataAndTime;
+    @JsonGetter("dt")
+    public Long getData() {
+        return data;
+    }
+    @JsonGetter("name")
+    public String getCityName() {
+        return cityName;
     }
 
     // Сеттеры
     @JsonSetter("main")
-    public void setMainDto(Main main) {
+    public void setMain(Main main) {
         this.main = main;
     }
-    @JsonSetter("dt_txt")
-    public void setDataAndTime(String dataAndTime) {
-        this.dataAndTime = dataAndTime;
+    @JsonSetter("dt")
+    public void setData(Long data) {
+        this.data = data;
+    }
+    @JsonSetter("name")
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 }

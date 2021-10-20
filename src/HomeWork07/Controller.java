@@ -71,8 +71,8 @@ public class Controller {
         weatherProvider.getWeather(Periods.FIVE_DAYS);
     }
 
-    // Метод Выводящий в консоль записи БД (!!! отправить лист в метод печати класса OpenWeatherMap)
+    // Метод Выводящий в консоль записи БД
     public void getReadBD() throws IOException {
-        myRepository.printDataBase(myRepository.getAllSavedData());
+        myRepository.printDataBase();
     }
 }

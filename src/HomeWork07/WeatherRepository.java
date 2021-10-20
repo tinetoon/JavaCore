@@ -4,6 +4,7 @@ import HomeWork07.classes.DataWeather;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -45,6 +46,7 @@ public class WeatherRepository implements DatabaseRepository {
     // Конструктор класса
     public WeatherRepository() {
         this.filename = ApplicationGlobalState.getInstance().getDATABASE_FILE_NAME();
+//        createTableIfNotExists();
     }
 
     // Метод возвращающий объект соединения с базой данных
@@ -67,10 +69,10 @@ public class WeatherRepository implements DatabaseRepository {
     public boolean saveWeatherData(DataWeather dataWeather) throws SQLException {
         try (Connection newConnection = getConnection(); // Конструкция try-with-resources автоматически закрывает ресурсы, открытые в блоке try
              PreparedStatement saveWeather = newConnection.prepareStatement(INSERT_WEATHER_QUERY)) {
-                saveWeather.setString(1, dataWeather.getCity());
-                saveWeather.setString(2, dataWeather.getDateTime());
-                saveWeather.setString(3, dataWeather.getWeatherText());
-                saveWeather.setDouble(4, (Double) dataWeather.getTemperature());
+                saveWeather.setString(2, dataWeather.getCity());
+                saveWeather.setString(3, dataWeather.getDateTime());
+                saveWeather.setString(4, dataWeather.getWeatherText());
+                saveWeather.setDouble(5, (Double) dataWeather.getTemperature());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -80,12 +82,34 @@ public class WeatherRepository implements DatabaseRepository {
     // Метод возвращающий лист с данными из БД (!!! дописать логику)
     @Override
     public List<DataWeather> getAllSavedData() throws IOException {
+        List<DataWeather> list = new LinkedList<>();
+        try (Connection newConnection = getConnection();
+             Statement printWeather = newConnection.createStatement()) {
+            ResultSet result = printWeather.executeQuery(READ_WEATHER_QUERY);
+            while (result.next()) {
+                DataWeather dataWeather = new DataWeather();
+                dataWeather.setCity(result.getString(2));
+                dataWeather.setDateTime(result.getString(3));
+                dataWeather.setWeatherText(result.getString(4));
+                dataWeather.setTemperature(result.getDouble(5));
+                list.add(dataWeather);
+//                System.out.println(
+//                        result.getInt(1) + " | " +
+//                                result.getString(2) + " | " +
+//                                result.getString(3) + " | " +
+//                                result.getString(4) + " | " +
+//                                result.getDouble(5)
+//                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         throw new IOException("Not implemented exception");
     }
 
     // Метод печати в консоль базы данных погоды
     @Override
-    public void printDataBase(List<DataWeather> list) throws IOException {
+    public void printDataBase() throws IOException {
         try (Connection newConnection = getConnection();
         Statement printWeather = newConnection.createStatement()) {
             ResultSet result = printWeather.executeQuery(READ_WEATHER_QUERY);

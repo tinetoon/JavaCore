@@ -1,6 +1,8 @@
 package HomeWork07;
 
+import HomeWork07.classes.DataWeather;
 import HomeWork07.dto.ListWeather;
+import HomeWork07.dto.Root;
 import HomeWork07.enums.Periods;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -8,6 +10,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Класс реализации запроса погоды на ресурсе openweathermap.org
@@ -38,6 +41,9 @@ public class OpenWeatherMap implements WeatherProvider {
     // Объект ответа от сервера
     WeatherResponse weatherResponse = new WeatherResponse();
 
+    // Объект репозитория
+    WeatherRepository myRepository = new WeatherRepository();
+
     // Переопределяем главный метод интерфейса WeatherProvider
     @Override
     public void getWeather(Periods periods) throws IOException {
@@ -49,21 +55,38 @@ public class OpenWeatherMap implements WeatherProvider {
         if (periods.equals(Periods.NOW)) {
 
             System.out.println("===== ПРОГНОЗ ПОГОДЫ НА ТЕКУЩУЮ ДАТУ =====");
+//            weatherResponse.setStringWeatherResponse(getWeatherNow(client));
+//            System.out.println("Температура: " + weatherResponse.getTemperatureNow() + " градусов.");
             weatherResponse.setStringWeatherResponse(getWeatherNow(client));
-            System.out.println("Температура: " + weatherResponse.getTemperatureNow() + " градусов.");
+            System.out.println("Прогноз погоды для города: " + weatherResponse
+                    .getTemperatureNowAfterParsing()
+                    .getCityName());
+            System.out.println("Дата: " + weatherResponse
+                    .getTemperatureNowAfterParsing()
+                    .getData() +
+                    ", Температура: " + weatherResponse
+                    .getTemperatureNowAfterParsing()
+                    .getMain()
+                    .getTemperature());
 
         } else {
 
             System.out.println("===== ПРОГНОЗ ПОГОДЫ НА " + ApplicationGlobalState.getInstance().getSelectedDayPeriod() + " ДНЕЙ =====");
             weatherResponse.setStringWeatherResponse(getWeatherPeriod(client));
-            System.out.println("Прогноз погоды для города: " + weatherResponse
-                    .getTemperatureAfterParsing()
+            Root weatherResponseRoot = weatherResponse.getTemperatureAfterParsing();
+            System.out.println("Прогноз погоды для города: " + weatherResponseRoot
                     .getCity()
                     .getCityName());
-            for (ListWeather it: weatherResponse.getTemperatureAfterParsing().getListWeather()) {
+            for (ListWeather it: weatherResponseRoot.getListWeather()) {
                 if (it.getDataAndTime().charAt(11) == '0' && it.getDataAndTime().charAt(12) == '9') {
-                    System.out.println("Дата: " + it.getDataAndTime() + ", Температура: " + it.getMainDto().getTemperature());
+                    System.out.println("Дата: " + it.getDataAndTime() + ", Температура: " + it.getMain().getTemperature());
                 }
+            }
+
+            try {
+                getDataWeather(weatherResponseRoot, myRepository); // Сохраняем данные в базу данных
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -133,6 +156,20 @@ public class OpenWeatherMap implements WeatherProvider {
         String body = response.body().string();
 
         return body;
+    }
+
+    // Метод заполняющий базу данных
+    public static void getDataWeather(Root root, WeatherRepository myRepo) throws SQLException {
+        DataWeather weather = new DataWeather();
+        weather.setCity(root.getCity().getCityName());
+        weather.setWeatherText("Ожидаемая температура: ");
+        for (ListWeather it: root.getListWeather()) {
+            if (it.getDataAndTime().charAt(11) == '0' && it.getDataAndTime().charAt(12) == '9') {
+                weather.setDateTime(it.getDataAndTime());
+                weather.setTemperature(it.getMain().getTemperature());
+                myRepo.saveWeatherData(weather);
+            }
+        }
     }
 
     // Сеттер на код города (для присвоения другого кода из пользовательского ввода, см. класс UserInterface)
