@@ -50,7 +50,7 @@ public class Controller {
                 getWeatherIn5Days();
                 break;
             case GET_READ_BD:
-                System.out.println("Дописать метод получения даныых из БД");// Дописать метод получения даныых из БД
+//                System.out.println("Дописать метод получения даныых из БД");// Дописать метод получения даныых из БД
                 getReadBD();
                 break;
         }

@@ -27,7 +27,7 @@ public class UserInterface {
     private void enterCitiZip(Scanner scanner) {
 
         while (true) {
-            System.out.println("Введите почтовый индекс Санкт-Петербурга (198097 или 198217): ");
+            System.out.print("Введите почтовый индекс Санкт-Петербурга (198097 или 198217): ");
 
             String citiZipTmp = scanner.nextLine(); // Инициализируем временную переменную для кода города
 
@@ -52,13 +52,14 @@ public class UserInterface {
     private void enterPeriodWeather(Scanner scanner) {
 
         while (true) {
-            System.out.println("Введите ответ:\n" +
-                    "0 - погода на текущую дату;\n" +
+            System.out.print("0 - погода на текущую дату;\n" +
                     "от 1 до 5 - погода на период в днях;\n" + // "от 1 до 5 - погода на период в днях;\n"
                     "6 - для чтения данных из БД\n" +
-                    "др. - выход из приложения.");
+                    "др. - выход из приложения.\n" +
+                    "Введите ответ: ");
 
             String inputUserTmp = scanner.nextLine(); // Инициализируем временную переменную для кода города
+            String periodWeatherTmp = inputUserTmp;
 
             // Проверяем правильность ввода периода (!!! вынести в отдельный метод boolean)
             if (!inputUserTmp.equals("0")
@@ -73,14 +74,12 @@ public class UserInterface {
             } if (inputUserTmp.equals("6")) {
                 System.out.println("===== Выполняем запрос в БД =====");
             } else {
-                String periodWeatherTmp = inputUserTmp;
                 System.out.println("Выбран период: " + periodWeatherTmp);
-
-                try {
-                    notifyController(periodWeatherTmp); // отправляем значение в контроллер и обрабатываем исключения
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            }
+            try {
+                notifyController(periodWeatherTmp); // отправляем значение в контроллер и обрабатываем исключения
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }

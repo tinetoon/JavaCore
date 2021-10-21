@@ -29,7 +29,7 @@ public class WeatherRepository implements DatabaseRepository {
             "city TEXT NOT NULL,\n" +
             "date_time TEXT NOT NULL,\n" +
             "weather_text TEXT NOT NULL,\n" +
-            "temperature REAL NOT NULL,\n" +
+            "temperature REAL NOT NULL\n" +
             ");";
     private final String INSERT_WEATHER_QUERY = "INSERT INTO weather (city, date_time, weather_text, temperature) VALUES (?, ?, ?, ?)";
     private final String READ_WEATHER_QUERY = "SELECT * FROM weather";
@@ -67,7 +67,8 @@ public class WeatherRepository implements DatabaseRepository {
     // Метод возвращающий результат сохранения данных в БД (!!! проверить возврат ошибки в нормальном режиме работы)
     @Override
     public boolean saveWeatherData(DataWeather dataWeather) throws SQLException {
-        printTest(dataWeather);
+//        printTest(dataWeather);
+        createTableIfNotExists();
         try (Connection newConnection = getConnection(); // Конструкция try-with-resources автоматически закрывает ресурсы, открытые в блоке try
              PreparedStatement saveWeather = newConnection.prepareStatement(INSERT_WEATHER_QUERY)) {
                 saveWeather.setString(1, dataWeather.getCity());
@@ -116,18 +117,25 @@ public class WeatherRepository implements DatabaseRepository {
         Statement printWeather = newConnection.createStatement()) {
             ResultSet result = printWeather.executeQuery(READ_WEATHER_QUERY);
             while (result.next()) {
+//                System.out.println(
+//                    result.getString("city") + " | " +
+//                    result.getString("date_time") + " | " +
+//                    result.getString("weather_text") + " | " +
+//                    result.getDouble("temperature")
+//                );
                 System.out.println(
-                    result.getInt(1) + " | " +
-                    result.getString(2) + " | " +
-                    result.getString(3) + " | " +
-                    result.getString(4) + " | " +
-                    result.getDouble(5)
+                        result.getInt(1) + " | " +
+                        result.getString(2) + " | " +
+                        result.getString(3) + " | " +
+                        result.getString(4) + " | " +
+                        result.getDouble(5)
                 );
             }
+            System.out.println("===== Сведения из БД получены успешно =====");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        throw new IOException("Ошибка печати БД с погодой"); // Создаём сообщение об ошибке для выброса на верх
+//        throw new IOException("Ошибка печати БД с погодой"); // Создаём сообщение об ошибке для выброса на верх
     }
 
     // Проверочный метод печати значений
