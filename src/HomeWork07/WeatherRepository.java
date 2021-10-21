@@ -31,7 +31,7 @@ public class WeatherRepository implements DatabaseRepository {
             "weather_text TEXT NOT NULL,\n" +
             "temperature REAL NOT NULL,\n" +
             ");";
-    private final String INSERT_WEATHER_QUERY = "INSERT INTO weather (city, date_time, weather_text, temperature) VALUES (?,?,?,?)";
+    private final String INSERT_WEATHER_QUERY = "INSERT INTO weather (city, date_time, weather_text, temperature) VALUES (?, ?, ?, ?)";
     private final String READ_WEATHER_QUERY = "SELECT * FROM weather";
 
     // Статический блок для инициализации драйвера работы с БД
@@ -67,12 +67,14 @@ public class WeatherRepository implements DatabaseRepository {
     // Метод возвращающий результат сохранения данных в БД (!!! проверить возврат ошибки в нормальном режиме работы)
     @Override
     public boolean saveWeatherData(DataWeather dataWeather) throws SQLException {
+        printTest(dataWeather);
         try (Connection newConnection = getConnection(); // Конструкция try-with-resources автоматически закрывает ресурсы, открытые в блоке try
              PreparedStatement saveWeather = newConnection.prepareStatement(INSERT_WEATHER_QUERY)) {
-                saveWeather.setString(2, dataWeather.getCity());
-                saveWeather.setString(3, dataWeather.getDateTime());
-                saveWeather.setString(4, dataWeather.getWeatherText());
-                saveWeather.setDouble(5, (Double) dataWeather.getTemperature());
+                saveWeather.setString(1, dataWeather.getCity());
+                saveWeather.setString(2, dataWeather.getDateTime());
+                saveWeather.setString(3, dataWeather.getWeatherText());
+                saveWeather.setDouble(4, dataWeather.getTemperature());
+                return saveWeather.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -126,6 +128,14 @@ public class WeatherRepository implements DatabaseRepository {
             e.printStackTrace();
         }
         throw new IOException("Ошибка печати БД с погодой"); // Создаём сообщение об ошибке для выброса на верх
+    }
+
+    // Проверочный метод печати значений
+    private static void printTest(DataWeather dataWeather) {
+        System.out.println("city: " + dataWeather.getCity() +
+                ", date_time: " + dataWeather.getDateTime() +
+                ", weather_text: " + dataWeather.getWeatherText() +
+                ", temperature: " + dataWeather.getTemperature());
     }
 
 }

@@ -12,14 +12,14 @@ public class DataWeather<T extends Number> {
     private String city;
     private String dateTime;
     private String weatherText;
-    private T temperature;
+    private Double temperature;
 
     // Конструктор по умолчанию
     public DataWeather() {
     }
 
     // Конструктор для создания строки БД
-    public DataWeather(String city, String dataTime, String weatherText, T temperature) {
+    public DataWeather(String city, String dataTime, String weatherText, Double temperature) {
         this.city = city;
         this.dateTime = dataTime;
         this.weatherText = weatherText;
@@ -36,7 +36,7 @@ public class DataWeather<T extends Number> {
     public String getWeatherText() {
         return weatherText;
     }
-    public T getTemperature() {
+    public Double getTemperature() {
         return temperature;
     }
 
@@ -50,7 +50,7 @@ public class DataWeather<T extends Number> {
     public void setWeatherText(String weatherText) {
         this.weatherText = weatherText;
     }
-    public void setTemperature(T temperature) {
+    public void setTemperature(Double temperature) {
         this.temperature = temperature;
     }
 }
