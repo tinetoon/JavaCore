@@ -166,7 +166,7 @@ public class OpenWeatherMap implements WeatherProvider {
         for (ListWeather it: root.getListWeather()) {
             if (it.getDataAndTime().charAt(11) == '0' && it.getDataAndTime().charAt(12) == '9') {
                 weather.setDateTime(it.getDataAndTime());
-                weather.setTemperature((Double) it.getMain().getTemperature());
+                weather.setTemperature(it.getMain().getTemperature());
                 myRepo.saveWeatherData(weather);
             }
         }

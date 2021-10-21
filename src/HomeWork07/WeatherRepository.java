@@ -74,7 +74,7 @@ public class WeatherRepository implements DatabaseRepository {
                 saveWeather.setString(1, dataWeather.getCity());
                 saveWeather.setString(2, dataWeather.getDateTime());
                 saveWeather.setString(3, dataWeather.getWeatherText());
-                saveWeather.setDouble(4, dataWeather.getTemperature());
+                saveWeather.setDouble(4, (Double) dataWeather.getTemperature());
                 return saveWeather.execute();
         } catch (SQLException e) {
             e.printStackTrace();
