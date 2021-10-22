@@ -7,4 +7,6 @@ package HomeWork09;
  */
 
 public interface Course {
+
+    String getNameOfTheCourse();
 }

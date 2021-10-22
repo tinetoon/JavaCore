@@ -18,11 +18,11 @@ public class StudentGeekBrains implements Student {
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
     public List<Course> getAllCourses() {
-        return null;
+        return allCourses;
     }
 }
