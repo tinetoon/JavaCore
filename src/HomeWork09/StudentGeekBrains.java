@@ -4,6 +4,11 @@ import HomeWork09.enums.Faculty;
 
 import java.util.List;
 
+/**
+ * Ответственный за создание класса - А.А. Дюжаков
+ * Дата создания: 21.10.2021
+ */
+
 public class StudentGeekBrains implements Student {
 
     private String name;
