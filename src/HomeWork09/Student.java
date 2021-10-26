@@ -11,5 +11,5 @@ import java.util.List;
 public interface Student {
 
     String getName();
-    List<Course> allCourses();
+    List<Course> getAllCourses();
 }
