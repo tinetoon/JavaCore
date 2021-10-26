@@ -9,5 +9,6 @@ package HomeWork07.enums;
 public enum Functionality {
     GET_NOW_WEATHER,
     GET_FIVE_DAYS_WEATHER,
-    GET_CUSTOM_WEATHER
+    GET_CUSTOM_WEATHER,
+    GET_READ_BD
 }

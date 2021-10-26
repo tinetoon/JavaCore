@@ -18,28 +18,28 @@ public class Controller {
     // Создаём объект провайдера погоды
     WeatherProvider weatherProvider = new OpenWeatherMap();
 
+    // Создаём объект репозитория
+    DatabaseRepository myRepository = new WeatherRepository();
+
     // Поле класса для проверки вариантов ввода
-    Map<Integer, Functionality> variantPeriodWeather = new HashMap<>();
+    Map<Integer, Functionality> variantInputUser = new HashMap<>();
 
     public Controller() {
-        this.variantPeriodWeather.put(0, Functionality.GET_NOW_WEATHER);
-        this.variantPeriodWeather.put(1, Functionality.GET_CUSTOM_WEATHER);
-        this.variantPeriodWeather.put(2, Functionality.GET_CUSTOM_WEATHER);
-        this.variantPeriodWeather.put(3, Functionality.GET_CUSTOM_WEATHER);
-        this.variantPeriodWeather.put(4, Functionality.GET_CUSTOM_WEATHER);
-        this.variantPeriodWeather.put(5, Functionality.GET_FIVE_DAYS_WEATHER);
+        this.variantInputUser.put(0, Functionality.GET_NOW_WEATHER);
+        this.variantInputUser.put(1, Functionality.GET_CUSTOM_WEATHER);
+        this.variantInputUser.put(2, Functionality.GET_CUSTOM_WEATHER);
+        this.variantInputUser.put(3, Functionality.GET_CUSTOM_WEATHER);
+        this.variantInputUser.put(4, Functionality.GET_CUSTOM_WEATHER);
+        this.variantInputUser.put(5, Functionality.GET_FIVE_DAYS_WEATHER);
+        this.variantInputUser.put(6, Functionality.GET_READ_BD);
     }
 
     // Проверка ввода пользователя (!!! код взят с урока, разобраться с логикой)
     public void onUserInput(String input) throws IOException {
 
-        int period = Integer.parseInt(input);
+        int value = Integer.parseInt(input);
 
-        if (!variantPeriodWeather.containsKey(period)) {
-            throw new IOException("Для ввода: " + period + " отсутствует прогноз погоды");
-        }
-
-        switch (variantPeriodWeather.get(period)) {
+        switch (variantInputUser.get(value)) {
             case GET_NOW_WEATHER:
                 getCurrentWeather();
                 break;
@@ -48,6 +48,10 @@ public class Controller {
                 break;
             case GET_FIVE_DAYS_WEATHER:
                 getWeatherIn5Days();
+                break;
+            case GET_READ_BD:
+//                System.out.println("Дописать метод получения даныых из БД");// Дописать метод получения даныых из БД
+                getReadBD();
                 break;
         }
     }
@@ -65,5 +69,10 @@ public class Controller {
     // Метод устанавливающий значение периода равным пяти
     public void getWeatherIn5Days() throws IOException {
         weatherProvider.getWeather(Periods.FIVE_DAYS);
+    }
+
+    // Метод Выводящий в консоль записи БД
+    public void getReadBD() throws IOException {
+        myRepository.printDataBase();
     }
 }

@@ -1,7 +1,8 @@
 package HomeWork07;
 
-import HomeWork07.classes.ListWeather;
-import HomeWork07.classes.Root;
+import HomeWork07.classes.DataWeather;
+import HomeWork07.dto.ListWeather;
+import HomeWork07.dto.Root;
 import HomeWork07.enums.Periods;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -9,6 +10,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Класс реализации запроса погоды на ресурсе openweathermap.org
@@ -39,6 +41,9 @@ public class OpenWeatherMap implements WeatherProvider {
     // Объект ответа от сервера
     WeatherResponse weatherResponse = new WeatherResponse();
 
+    // Объект репозитория
+    WeatherRepository myRepository = new WeatherRepository();
+
     // Переопределяем главный метод интерфейса WeatherProvider
     @Override
     public void getWeather(Periods periods) throws IOException {
@@ -50,59 +55,40 @@ public class OpenWeatherMap implements WeatherProvider {
         if (periods.equals(Periods.NOW)) {
 
             System.out.println("===== ПРОГНОЗ ПОГОДЫ НА ТЕКУЩУЮ ДАТУ =====");
+//            weatherResponse.setStringWeatherResponse(getWeatherNow(client));
+//            System.out.println("Температура: " + weatherResponse.getTemperatureNow() + " градусов.");
             weatherResponse.setStringWeatherResponse(getWeatherNow(client));
-            System.out.println("Температура: " + weatherResponse.getTemperatureNow() + " градусов.");
+            System.out.println("Прогноз погоды для города: " + weatherResponse
+                    .getTemperatureNowAfterParsing()
+                    .getCityName());
+            System.out.println("Дата: " + weatherResponse
+                    .getTemperatureNowAfterParsing()
+                    .getData() +
+                    ", Температура: " + weatherResponse
+                    .getTemperatureNowAfterParsing()
+                    .getMain()
+                    .getTemperature());
 
         } else {
 
             System.out.println("===== ПРОГНОЗ ПОГОДЫ НА " + ApplicationGlobalState.getInstance().getSelectedDayPeriod() + " ДНЕЙ =====");
             weatherResponse.setStringWeatherResponse(getWeatherPeriod(client));
-            Root weatherList = weatherResponse.getTemperature();
-            System.out.println("Прогноз погоды для города: " + weatherList.getCity().getName());
-            for (Object it: weatherList.getList()) {
-                ListWeather list = (ListWeather) it;
-//                String time1 = Character.toString(list.getDt_txt().charAt(11));
-//                String time2 = Character.toString(list.getDt_txt().charAt(12));
-                if (list.getDt_txt().charAt(11) == '0' && list.getDt_txt().charAt(12) == '0') {
-//                if (time1.equals("0") && time2.equals("0")) {
-                    System.out.println("Дата: " + list.getDt_txt() + "; Температура: " + list.getMain().getTemp());
+            Root weatherResponseRoot = weatherResponse.getTemperatureAfterParsing();
+            System.out.println("Прогноз погоды для города: " + weatherResponseRoot
+                    .getCity()
+                    .getCityName());
+            for (ListWeather it: weatherResponseRoot.getListWeather()) {
+                if (it.getDataAndTime().charAt(11) == '0' && it.getDataAndTime().charAt(12) == '9') {
+                    System.out.println("Дата: " + it.getDataAndTime() + ", Температура: " + it.getMain().getTemperature());
                 }
             }
+
+            try {
+                getDataWeather(weatherResponseRoot, myRepository); // Сохраняем данные в базу данных
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-    }
-
-    // Метод запроса погоды на текущую дату
-    public static void printWeatherNow(OkHttpClient client) throws IOException {
-
-        // Создаём URL для отправки GET запроса
-        HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
-                .host(BASE_HOST)
-                .addPathSegment(DATA)
-                .addPathSegment(API_VERSION)
-                .addPathSegment(WEATHER)
-                .addQueryParameter("zip", (citiZip + "," + RUSSIA_CODE))
-                .addQueryParameter("appid", APPI_ID)
-                .addQueryParameter("units", UNITS)
-                .build();
-
-        // Выводим в консоль информацию об отправке запроса
-        System.out.println("Отправляем GET запрос: " + url.toString());
-
-        // Создаём объект отправки запросов на сервер
-        Request request = new Request.Builder()
-                .header("Content-type", "application/json")
-                .url(url)
-                .build();
-
-        // Создаём объект получения ответов с сервера
-        Response response = client.newCall(request).execute();
-
-        // Объявляем строковую переменную и инициализируем её ответом сервера
-        String body = response.body().string();
-
-        System.out.println("Код ответа сервера: " + response.code());
-        System.out.println(body);
     }
 
     // Метод возвращающий прогноз погоды на текущую дату
@@ -136,41 +122,6 @@ public class OpenWeatherMap implements WeatherProvider {
         String body = response.body().string();
 
         return body;
-    }
-
-    // Метод запроса погоды на 5 (1-5) дней
-    public static void printWeatherPeriod(OkHttpClient client) throws IOException {
-
-        // Создаём URL для отправки GET запроса
-        HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
-                .host(BASE_HOST)
-                .addPathSegment(DATA)
-                .addPathSegment(API_VERSION)
-                .addPathSegment(FORECAST)
-                .addQueryParameter("zip", (citiZip + "," + RUSSIA_CODE))
-                .addQueryParameter("appid", APPI_ID)
-                .addQueryParameter("cnt", cnt)
-                .addQueryParameter("units", UNITS)
-                .build();
-
-        // Выводим в консоль информацию об отправке запроса
-        System.out.println("Отправляем GET запрос: " + url.toString());
-
-        // Создаём объект отправки запросов на сервер
-        Request request = new Request.Builder()
-                .header("Content-type", "application/json")
-                .url(url)
-                .build();
-
-        // Создаём объект получения ответов с сервера
-        Response response = client.newCall(request).execute();
-
-        // Объявляем строковую переменную и инициализируем её ответом сервера
-        String body = response.body().string();
-
-        System.out.println("Код ответа сервера: " + response.code());
-        System.out.println(body);
     }
 
     // Метод возвращающий прогноз погоды на 5 (1-5) дней
@@ -207,12 +158,18 @@ public class OpenWeatherMap implements WeatherProvider {
         return body;
     }
 
-    // Геттеры на код города и количество дней погоды
-    public static String getCitiZip() {
-        return citiZip;
-    }
-    public static String getCnt() {
-        return cnt;
+    // Метод заполняющий базу данных
+    public static void getDataWeather(Root root, WeatherRepository myRepo) throws SQLException {
+        DataWeather weather = new DataWeather();
+        weather.setCity(root.getCity().getCityName());
+        weather.setWeatherText("Ожидаемая температура: ");
+        for (ListWeather it: root.getListWeather()) {
+            if (it.getDataAndTime().charAt(11) == '0' && it.getDataAndTime().charAt(12) == '9') {
+                weather.setDateTime(it.getDataAndTime());
+                weather.setTemperature(it.getMain().getTemperature());
+                myRepo.saveWeatherData(weather);
+            }
+        }
     }
 
     // Сеттер на код города (для присвоения другого кода из пользовательского ввода, см. класс UserInterface)
